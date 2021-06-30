@@ -1,7 +1,12 @@
 import React from "react";
+import LoginLayout from "../components/LoginLayout";
 
 const login = () => {
-  return <div>로그인 페이지 입니다.</div>;
+  return (
+    <div>
+      <LoginLayout />
+    </div>
+  );
 };
 
 export default login;
