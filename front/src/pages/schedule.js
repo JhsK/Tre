@@ -1,7 +1,12 @@
 import React from "react";
+import MenuComponents from "../components/MenuComponents";
 
 const schedule = () => {
-  return <div>계획 페이지 입니다.</div>;
+  return (
+    <>
+      <MenuComponents />
+    </>
+  );
 };
 
 export default schedule;

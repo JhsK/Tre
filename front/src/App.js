@@ -8,12 +8,12 @@ import React from "react";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Route path="/" component={Login} exact={true} />
       <Route path="/join" component={Join} exact={true} />
       <Route path="/password" component={PasswordFind} exact={true} />
       <Route path="/schedule" component={Schedule} exact={true} />
-    </div>
+    </>
   );
 };
 
