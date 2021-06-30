@@ -18,7 +18,7 @@ const MenuComponents = () => {
   return (
     <>
       <Menu
-        style={{ width: 256, height: "100%" }}
+        style={{ width: 300, height: "100%" }}
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         mode="inline"
