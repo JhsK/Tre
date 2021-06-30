@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import LoginComponents from "./LoginComponents";
 
-const TaggedPosition = styled.div`
+export const TaggedPosition = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
