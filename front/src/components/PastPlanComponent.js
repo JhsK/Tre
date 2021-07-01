@@ -1,45 +1,16 @@
 import React from "react";
 import { Radio } from "antd";
-import styled from "styled-components";
+import {
+  ListContainer,
+  RadioContainer,
+  DeleteBtn,
+  PlanTextContainer,
+  PlanText,
+  RadioPlanDday,
+  RadioPlanDate,
+} from "./FuturePlanComponent";
 
-export const ListContainer = styled.div`
-  padding: 3rem 4rem;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const RadioContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-`;
-
-export const DeleteBtn = styled.span`
-  color: red;
-  cursor: pointer;
-`;
-
-export const PlanTextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const PlanText = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const RadioPlanDday = styled.span`
-  color: red;
-`;
-
-export const RadioPlanDate = styled.span`
-  padding-left: 1.5rem;
-  font-size: 0.8rem;
-`;
-
-const FuturePlanComponent = () => {
+const PastPlanComponent = () => {
   return (
     <>
       <ListContainer>
@@ -70,4 +41,4 @@ const FuturePlanComponent = () => {
   );
 };
 
-export default FuturePlanComponent;
+export default PastPlanComponent;
