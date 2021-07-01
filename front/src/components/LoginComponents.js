@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import LoginForm from "./style/LoginForm.css";
+import useInput from "../hooks/useInput";
+
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -17,6 +19,13 @@ const KakaoBtn = styled.button`
 `;
 
 const LoginComponents = () => {
+  const [username, onChangeUsername] = useInput("");
+  const [password, onChangePassword] = useInput("");
+
+  const onSubmitLogin = useCallback(() => {
+    console.log(username, password);
+  }, [username, password]);
+
   return (
     <>
       <img src="image/logo_middle2.png" alt="logo" style={{ width: "50%" }} />
@@ -26,6 +35,7 @@ const LoginComponents = () => {
         initialValues={{
           remember: true,
         }}
+        onFinish={onSubmitLogin}
       >
         <Form.Item
           name="username"
@@ -39,6 +49,8 @@ const LoginComponents = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
+            value={username}
+            onChange={onChangeUsername}
           />
         </Form.Item>
         <Form.Item
@@ -54,6 +66,8 @@ const LoginComponents = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={onChangePassword}
           />
         </Form.Item>
         <Form.Item>

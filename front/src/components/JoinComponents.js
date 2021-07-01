@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Form, Input, Button } from "antd";
+import useInput from "../hooks/useInput";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const JoinComponents = () => {
+  const [username, onChangeUsername] = useInput("");
+  const [password, onChangePassword] = useInput("");
+  const [nickname, onChangeNickname] = useInput("");
+  const [email, onChangeEmail] = useInput("");
+
+  const onSubmitJoin = useCallback(() => {
+    console.log(username, password, nickname, email);
+  }, [username, password, nickname, email]);
+
   return (
     <>
       <img src="image/logo_middle2.png" alt="logo" style={{ width: "50%" }} />
@@ -13,6 +23,7 @@ const JoinComponents = () => {
         initialValues={{
           remember: true,
         }}
+        onFinish={onSubmitJoin}
       >
         <Form.Item
           name="username"
@@ -26,6 +37,8 @@ const JoinComponents = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
+            value={username}
+            onChange={onChangeUsername}
           />
         </Form.Item>
         <Form.Item
@@ -40,6 +53,8 @@ const JoinComponents = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Nickname"
+            value={nickname}
+            onChange={onChangeNickname}
           />
         </Form.Item>
         <Form.Item
@@ -54,6 +69,8 @@ const JoinComponents = () => {
           <Input
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="Email"
+            value={email}
+            onChange={onChangeEmail}
           />
         </Form.Item>
         <Form.Item
@@ -69,6 +86,8 @@ const JoinComponents = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={onChangePassword}
           />
         </Form.Item>
         <Form.Item
