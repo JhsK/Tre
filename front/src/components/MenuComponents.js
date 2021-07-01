@@ -55,6 +55,8 @@ const MenuComponents = () => {
             marginBottom: "2rem",
             position: "absolute",
             bottom: "5%",
+            width: "250px",
+            height: "80px",
           }}
         >
           <Menu.Item key="4">내 정보</Menu.Item>
