@@ -7,6 +7,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
@@ -30,21 +31,21 @@ const MenuComponents = () => {
           icon={<ScheduleOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          계획
+          <Link to="/schedule">계획</Link>
         </Menu.Item>
         <Menu.Item
           key="2"
           icon={<CalendarOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          달력
+          <Link to="/calendar">달력</Link>
         </Menu.Item>
         <Menu.Item
           key="3"
           icon={<HourglassOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          추억
+          <Link to="memory">추억</Link>
         </Menu.Item>
         <SubMenu
           key="sub1"
