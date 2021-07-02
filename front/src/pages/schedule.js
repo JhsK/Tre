@@ -3,7 +3,7 @@ import MenuComponents from "../components/MenuComponents";
 import ScheduleLayout from "../components/ScheduleLayout";
 import styled from "styled-components";
 
-const ScheduleContainer = styled.div`
+export const ScheduleContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;

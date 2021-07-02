@@ -13,7 +13,7 @@ const tabContents = {
 const StyledBackground = styled.div`
   background-color: #dfe6ed;
   position: relative;
-  width: 100%;
+  width: 90%;
   height: 100%;
 `;
 

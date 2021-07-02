@@ -1,7 +1,15 @@
 import React from "react";
+import CalendarLayout from "../components/CalendarLayout";
+import MenuComponents from "../components/MenuComponents";
+import { ScheduleContainer } from "./schedule";
 
 const calendar = () => {
-  return <div>테스트입니다.</div>;
+  return (
+    <ScheduleContainer>
+      <MenuComponents />
+      <CalendarLayout />
+    </ScheduleContainer>
+  );
 };
 
 export default calendar;

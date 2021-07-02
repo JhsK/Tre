@@ -26,3 +26,16 @@
 .login-form-forgot {
   float: right;
 }
+
+.site-page-header {
+  margin-left: 1rem;
+  padding-top: 2rem;
+}
+
+.site-page-header span {
+  font-size: 1.7rem;
+}
+
+.ant-picker-calendar-header {
+  justify-content: flex-start;
+}
