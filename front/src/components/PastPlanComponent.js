@@ -17,10 +17,8 @@ const PastPlanComponent = () => {
         <RadioContainer>
           <PlanTextContainer>
             <PlanText>
-              <Radio style={{ fontSize: "1.2rem" }}>
-                프로젝트 기획 마무리하기
-              </Radio>
-              <RadioPlanDday>D-2</RadioPlanDday>
+              <Radio style={{ fontSize: "1.2rem" }}>깃 허브 1일 1커밋</Radio>
+              <RadioPlanDday>D+7</RadioPlanDday>
             </PlanText>
             <RadioPlanDate>2021.06.21 ~ 2021.06.30</RadioPlanDate>
           </PlanTextContainer>
@@ -29,8 +27,10 @@ const PastPlanComponent = () => {
         <RadioContainer>
           <PlanTextContainer>
             <PlanText>
-              <Radio style={{ fontSize: "1.2rem" }}>DB 설계하기</Radio>
-              <RadioPlanDday>D-2</RadioPlanDday>
+              <Radio style={{ fontSize: "1.2rem" }}>
+                코딩 테스트 매일 2문제 풀기
+              </Radio>
+              <RadioPlanDday>D+4</RadioPlanDday>
             </PlanText>
             <RadioPlanDate>2021.06.21 ~ 2021.06.30</RadioPlanDate>
           </PlanTextContainer>
