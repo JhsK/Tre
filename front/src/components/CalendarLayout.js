@@ -11,6 +11,7 @@ import {
   Input,
   Radio,
 } from "antd";
+import Item from "antd/lib/list/Item";
 
 const { RangePicker } = DatePicker;
 
@@ -21,11 +22,12 @@ const CalendarContainer = styled.div`
 
 const CalendarLayout = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [dateValue, setDateValue] = useState("");
+  const [dateValue, setDateValue] = useState(0);
   const [planText, setPlanText] = useState("");
   // moment("2021-07-02")
   const [radioValue, setRadioValue] = useState("");
   const [datePickerValue, setDatePickerValue] = useState("");
+  const [momentDate, setMomentDate] = useState(0);
 
   const handleCancel = useCallback(() => {
     setModalVisible(false);
@@ -39,6 +41,7 @@ const CalendarLayout = () => {
 
   const onClickedDate = useCallback((e) => {
     setModalVisible(true);
+    setMomentDate(e.date());
     setDateValue(moment(e._d));
   }, []);
 
@@ -60,12 +63,46 @@ const CalendarLayout = () => {
     });
   }, []);
 
+  const getListData = useCallback(
+    (value) => {
+      let listData;
+      //console.log(value);
+      //console.log(radioValue, planText);
+      switch (value.date()) {
+        case momentDate:
+          listData = [{ type: radioValue, content: planText }];
+          break;
+        default:
+      }
+      return listData || [];
+    },
+    [momentDate, radioValue, planText]
+  );
+
+  const dateCellRender = useCallback(
+    (value) => {
+      const listData = getListData(value);
+      console.log(listData);
+      return (
+        <ul className="events">
+          {listData.map((item) => (
+            <li key={item.content}>
+              <Badge status={item.type} text={item.content} />
+            </li>
+          ))}
+        </ul>
+      );
+    },
+    [getListData]
+  );
+
   return (
     <CalendarContainer>
       <PageHeader className="site-page-header" title="Calendar" />
       <Calendar
         value={dateValue}
         onSelect={onClickedDate}
+        dateCellRender={dateCellRender}
         style={{ width: "95%", marginLeft: "2rem" }}
       />
       <Modal
