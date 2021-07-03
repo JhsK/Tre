@@ -41,7 +41,7 @@ const CalendarLayout = () => {
 
   const onClickedDate = useCallback((e) => {
     setModalVisible(true);
-    setMomentDate(e.date());
+    setMomentDate(e.format("YYYY-MM-DD"));
     setDateValue(moment(e._d));
   }, []);
 
@@ -66,9 +66,9 @@ const CalendarLayout = () => {
   const getListData = useCallback(
     (value) => {
       let listData;
-      //console.log(value);
+      console.log(value.format("YYYY-MM-DD"));
       //console.log(radioValue, planText);
-      switch (value.date()) {
+      switch (value.format("YYYY-MM-DD")) {
         case momentDate:
           listData = [{ type: radioValue, content: planText }];
           break;
@@ -82,7 +82,7 @@ const CalendarLayout = () => {
   const dateCellRender = useCallback(
     (value) => {
       const listData = getListData(value);
-      console.log(listData);
+      // console.log(listData);
       return (
         <ul className="events">
           {listData.map((item) => (
