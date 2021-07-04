@@ -9,6 +9,8 @@ import {
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import LoginForm from "./style/LoginForm.css";
+
 const { SubMenu } = Menu;
 
 const LogoImg = styled.img`
