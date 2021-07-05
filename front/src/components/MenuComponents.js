@@ -29,7 +29,6 @@ const MenuComponents = () => {
       <Menu
         style={{ width: "15%", height: "100%" }}
         defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
         mode="inline"
         theme="light"
       >
