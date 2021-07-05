@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
-import { logoutAction } from "../reducers";
+import { logoutAction } from "../reducers/user";
 
 const { SubMenu } = Menu;
 

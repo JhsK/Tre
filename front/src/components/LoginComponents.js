@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import LoginForm from "./style/LoginForm.css";
 import useInput from "../hooks/useInput";
-import { loginAction } from "../reducers";
+import { loginAction } from "../reducers/user";
 
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
