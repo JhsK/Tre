@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Menu } from "antd";
 import {
   ScheduleOutlined,
@@ -8,8 +8,10 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
+import { logoutAction } from "../reducers";
 
 const { SubMenu } = Menu;
 
@@ -18,6 +20,10 @@ const LogoImg = styled.img`
 `;
 
 const MenuComponents = () => {
+  const dispatch = useDispatch();
+  const onClicedLogout = useCallback(() => {
+    dispatch(logoutAction());
+  }, []);
   return (
     <>
       <Menu
@@ -63,7 +69,9 @@ const MenuComponents = () => {
           }}
         >
           <Menu.Item key="4">내 정보</Menu.Item>
-          <Menu.Item key="5">로그아웃</Menu.Item>
+          <Menu.Item key="5" onClick={() => onClicedLogout()}>
+            로그아웃
+          </Menu.Item>
         </SubMenu>
       </Menu>
     </>
