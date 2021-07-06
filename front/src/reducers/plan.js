@@ -1,5 +1,10 @@
 export const initialState = {
-  planData: {},
+  planData: {
+    title: "",
+    start: "",
+    end: "",
+    dateValue: "",
+  },
 };
 
 export const planAddAction = (data) => {

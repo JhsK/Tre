@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { planAddAction } from "../reducers/plan";
 
@@ -18,14 +18,14 @@ const CalendarContainer = styled.div`
 `;
 
 const FullCalendarTest = () => {
+  const planData = useSelector((state) => state.plan.planData);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false); // modal 생성 여부
   const [dateValue, setDateValue] = useState(""); // 캘린더 달력 클릭 시 값
-  const [planText, setPlanText] = useState(""); // 일정 추가 내용
+  const [title, setTitle] = useState(""); // 일정 추가 내용
   const [radioValue, setRadioValue] = useState(""); // badge 상태 값
-  const [startDate, setStartDate] = useState(""); // DatePicker 기본 default 날짜 값
-  const [endDate, setEndDate] = useState(""); // DatePicker 기본 default 날짜 값
-
+  const [start, setStart] = useState(""); // DatePicker 기본 default 날짜 객체
+  const [end, setEnd] = useState(""); // DatePicker 기본 default 날짜 객체
   const handleCancel = useCallback(() => {
     setModalVisible(false);
   }, []);
@@ -34,24 +34,26 @@ const FullCalendarTest = () => {
     setModalVisible(false);
     dispatch(
       planAddAction({
-        planText,
+        start,
+        end,
+        title,
         radioValue,
         dateValue,
       })
     );
-    console.log(planText, radioValue, dateValue);
-  }, [planText, radioValue, dateValue]);
+    console.log(title, radioValue, dateValue);
+  }, [title, radioValue, dateValue]);
 
   const onClickedDate = useCallback((dateClickInfo) => {
     setDateValue(dateClickInfo.dateStr);
-    setStartDate(dateClickInfo.date);
-    setEndDate(dateClickInfo.date);
+    setStart(dateClickInfo.date);
+    setEnd(dateClickInfo.date);
     setModalVisible(true);
   }, []);
 
   const onChangePlanText = useCallback((e) => {
     e.preventDefault();
-    setPlanText(e.target.value);
+    setTitle(e.target.value);
   }, []);
 
   const onChangeRadio = useCallback((e) => {
@@ -66,10 +68,7 @@ const FullCalendarTest = () => {
         initialView="dayGridMonth"
         height="90%"
         dateClick={onClickedDate}
-        events={[
-          { title: "event 1", start: "2021-07-01", end: "2021-07-04" },
-          { title: "event 2", date: "2021-07-01" },
-        ]}
+        events={[planData]}
       />
       <Modal
         title="일정 추가"
@@ -78,22 +77,22 @@ const FullCalendarTest = () => {
         onCancel={handleCancel}
       >
         <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          selected={start}
+          onChange={(date) => setStart(date)}
           selectsStart
-          startDate={startDate}
+          startDate={start}
         />
         <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
+          selected={end}
+          onChange={(date) => setEnd(date)}
           selectsEnd
-          startDate={startDate}
-          endDate={endDate}
+          startDate={start}
+          endDate={end}
         />
         <Input
           placeholder="일정을 입력해주세요"
           style={{ marginBottom: "2.5rem" }}
-          value={planText}
+          value={title}
           onChange={onChangePlanText}
         />
         <Radio.Group onChange={onChangeRadio}>
