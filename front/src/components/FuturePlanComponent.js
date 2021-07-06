@@ -44,35 +44,37 @@ const FuturePlanComponent = () => {
   const planData = useSelector((state) => state.plan.planData);
   let start = planData.start;
   let end = planData.end;
-  let now = new Date();
-  let distance = end.getTime() - now.getTime();
-  let dDay = Math.floor(distance / (1000 * 60 * 60 * 24)) + 1;
+  // let now = new Date();
+  // let distance = end.getTime() - now.getTime();
+  // let dDay = Math.floor(distance / (1000 * 60 * 60 * 24)) + 1;
 
   return (
     <>
       <ListContainer>
         <RadioContainer>
-          <PlanTextContainer>
-            <PlanText>
-              <Radio style={{ fontSize: "1.2rem" }}>{planData.title}</Radio>
-              <RadioPlanDday>D-{dDay}</RadioPlanDday>
-            </PlanText>
-            <RadioPlanDate>
-              {String(start.getFullYear()) +
-                "." +
-                String(start.getMonth() + 1) +
-                "." +
-                String(start.getDate()) +
-                " "}
-              ~
-              {String(end.getFullYear()) +
-                "." +
-                String(end.getMonth() + 1) +
-                "." +
-                String(end.getDate()) +
-                " "}
-            </RadioPlanDate>
-          </PlanTextContainer>
+          {end && (
+            <PlanTextContainer>
+              <PlanText>
+                <Radio style={{ fontSize: "1.2rem" }}>{planData.title}</Radio>
+                <RadioPlanDday>D-2</RadioPlanDday>
+              </PlanText>
+              <RadioPlanDate>
+                {String(start.getFullYear()) +
+                  "." +
+                  String(start.getMonth() + 1) +
+                  "." +
+                  String(start.getDate()) +
+                  " "}
+                ~
+                {String(end.getFullYear()) +
+                  "." +
+                  String(end.getMonth() + 1) +
+                  "." +
+                  String(end.getDate()) +
+                  " "}
+              </RadioPlanDate>
+            </PlanTextContainer>
+          )}
           <DeleteBtn>삭제</DeleteBtn>
         </RadioContainer>
         <RadioContainer>

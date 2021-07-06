@@ -8,9 +8,11 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import DatePicker from "react-datepicker";
 
-import LoginForm from "./style/LoginForm.css";
-import FullCalendarStyle from "./style/FullCalendarStyle.css";
-import { Badge, Modal, Input, Radio } from "antd";
+import "./style/LoginForm.css";
+import "./style/DatePickerStyle.css";
+import "./style/FullCalendarStyle.css";
+
+import { Modal, Input } from "antd";
 
 const CalendarContainer = styled.div`
   width: 90%;
@@ -23,7 +25,6 @@ const FullCalendarTest = () => {
   const [modalVisible, setModalVisible] = useState(false); // modal 생성 여부
   const [dateValue, setDateValue] = useState(""); // 캘린더 달력 클릭 시 값
   const [title, setTitle] = useState(""); // 일정 추가 내용
-  const [radioValue, setRadioValue] = useState(""); // badge 상태 값
   const [start, setStart] = useState(""); // DatePicker 기본 default 날짜 객체
   const [end, setEnd] = useState(""); // DatePicker 기본 default 날짜 객체
   const handleCancel = useCallback(() => {
@@ -38,12 +39,11 @@ const FullCalendarTest = () => {
         start,
         end,
         title,
-        radioValue,
         dateValue,
       })
     );
-    console.log(title, radioValue, dateValue);
-  }, [title, radioValue, dateValue]);
+    console.log(title, dateValue);
+  }, [title, dateValue]);
 
   const onClickedDate = useCallback((dateClickInfo) => {
     setDateValue(dateClickInfo.dateStr);
@@ -55,11 +55,6 @@ const FullCalendarTest = () => {
   const onChangePlanText = useCallback((e) => {
     e.preventDefault();
     setTitle(e.target.value);
-  }, []);
-
-  const onChangeRadio = useCallback((e) => {
-    e.preventDefault();
-    setRadioValue(e.target.value);
   }, []);
 
   return (
@@ -83,6 +78,7 @@ const FullCalendarTest = () => {
           selectsStart
           startDate={start}
         />
+        ~
         <DatePicker
           selected={end}
           onChange={(date) => setEnd(date)}
@@ -96,23 +92,6 @@ const FullCalendarTest = () => {
           value={title}
           onChange={onChangePlanText}
         />
-        <Radio.Group onChange={onChangeRadio}>
-          <Radio value={"success"}>
-            <Badge status="success" />
-          </Radio>
-          <Radio value={"error"}>
-            <Badge status="error" />
-          </Radio>
-          <Radio value={"default"}>
-            <Badge status="default" />
-          </Radio>
-          <Radio value={"processing"}>
-            <Badge status="processing" />
-          </Radio>
-          <Radio value={"warning"}>
-            <Badge status="warning" />
-          </Radio>
-        </Radio.Group>
       </Modal>
     </CalendarContainer>
   );
