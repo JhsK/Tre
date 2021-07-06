@@ -1,6 +1,6 @@
 export const initialState = {
   planData: {
-    title: "",
+    title: null,
     start: "",
     end: "",
     dateValue: "",

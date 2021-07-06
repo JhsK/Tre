@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { planAddAction } from "../reducers/plan";
+import PlanListComponent from "./PlanListComponent";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -72,6 +73,7 @@ const FullCalendarTest = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {planData.title && <PlanListComponent />}
         <DatePicker
           selected={start}
           onChange={(date) => setStart(date)}
