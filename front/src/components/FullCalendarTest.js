@@ -29,6 +29,7 @@ const FullCalendarTest = () => {
   const handleCancel = useCallback(() => {
     setModalVisible(false);
   }, []);
+  console.log(start);
 
   const handleOk = useCallback(() => {
     setModalVisible(false);

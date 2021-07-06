@@ -1,6 +1,7 @@
 import React from "react";
 import { Radio } from "antd";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 export const ListContainer = styled.div`
   padding: 3rem 4rem;
@@ -40,18 +41,37 @@ export const RadioPlanDate = styled.span`
 `;
 
 const FuturePlanComponent = () => {
+  const planData = useSelector((state) => state.plan.planData);
+  let start = planData.start;
+  let end = planData.end;
+  let now = new Date();
+  let distance = end.getTime() - now.getTime();
+  let dDay = Math.floor(distance / (1000 * 60 * 60 * 24)) + 1;
+
   return (
     <>
       <ListContainer>
         <RadioContainer>
           <PlanTextContainer>
             <PlanText>
-              <Radio style={{ fontSize: "1.2rem" }}>
-                프로젝트 기획 마무리하기
-              </Radio>
-              <RadioPlanDday>D-2</RadioPlanDday>
+              <Radio style={{ fontSize: "1.2rem" }}>{planData.title}</Radio>
+              <RadioPlanDday>D-{dDay}</RadioPlanDday>
             </PlanText>
-            <RadioPlanDate>2021.06.21 ~ 2021.06.30</RadioPlanDate>
+            <RadioPlanDate>
+              {String(start.getFullYear()) +
+                "." +
+                String(start.getMonth() + 1) +
+                "." +
+                String(start.getDate()) +
+                " "}
+              ~
+              {String(end.getFullYear()) +
+                "." +
+                String(end.getMonth() + 1) +
+                "." +
+                String(end.getDate()) +
+                " "}
+            </RadioPlanDate>
           </PlanTextContainer>
           <DeleteBtn>삭제</DeleteBtn>
         </RadioContainer>
