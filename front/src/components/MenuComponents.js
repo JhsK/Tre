@@ -38,7 +38,7 @@ const MenuComponents = () => {
           icon={<ScheduleOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          <Link to="/schedule">계획</Link>
+          <Link to="/">계획</Link>
         </Menu.Item>
         <Menu.Item
           key="2"
