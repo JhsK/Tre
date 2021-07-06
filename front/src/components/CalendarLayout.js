@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
+import { planAddAction } from "../reducers/plan";
 import LoginForm from "./style/LoginForm.css";
 import {
   Calendar,
@@ -11,6 +12,7 @@ import {
   Input,
   Radio,
 } from "antd";
+import { useDispatch } from "react-redux";
 
 const { RangePicker } = DatePicker;
 
@@ -20,10 +22,10 @@ const CalendarContainer = styled.div`
 `;
 
 const CalendarLayout = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [dateValue, setDateValue] = useState(0);
   const [planText, setPlanText] = useState("");
-  // moment("2021-07-02")
   const [radioValue, setRadioValue] = useState("");
   const [datePickerValue, setDatePickerValue] = useState("");
   const [momentDate, setMomentDate] = useState(0);
@@ -35,12 +37,21 @@ const CalendarLayout = () => {
 
   const handleOk = useCallback(() => {
     setModalVisible(false);
+    dispatch(
+      planAddAction({
+        datePickerValue,
+        planText,
+        radioValue,
+        dateValue,
+      })
+    );
     console.log(datePickerValue, planText, radioValue, dateValue);
   }, [datePickerValue, planText, radioValue, dateValue]);
 
   const onClickedDate = useCallback((e) => {
     setModalVisible(true);
     setMomentDate(e.format("YYYY-MM-DD"));
+    setDatePickerValue(e.format("YYYY-MM-DD"));
     setDateValue(moment(e._d));
   }, []);
 
@@ -55,7 +66,7 @@ const CalendarLayout = () => {
   }, []);
 
   const onChangeDatePicker = useCallback((e) => {
-    console.log(e[0].format("YYYY-MM-DD"));
+    //console.log(e[0].format("YYYY-MM-DD"));
     setDatePickerValue({
       firstDay: e[0].format("YYYY-MM-DD"),
       lastDay: e[1].format("YYYY-MM-DD"),
@@ -65,7 +76,7 @@ const CalendarLayout = () => {
   const getListData = useCallback(
     (value) => {
       let listData;
-      console.log(value.format("YYYY-MM-DD"));
+      //console.log(value.format("YYYY-MM-DD"));
       //console.log(radioValue, planText);
       switch (value.format("YYYY-MM-DD")) {
         case momentDate:
@@ -113,7 +124,7 @@ const CalendarLayout = () => {
         <RangePicker
           bordered={false}
           format={"YYYY/MM/DD"}
-          value={[dateValue, dateValue]}
+          defaultValue={[dateValue, dateValue]}
           style={{ marginBottom: "2rem" }}
           // value={datePickerValue}
           onChange={onChangeDatePicker}

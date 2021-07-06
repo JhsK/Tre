@@ -26,8 +26,13 @@ const LoginComponents = () => {
   const [password, onChangePassword] = useInput("");
 
   const onSubmitLogin = useCallback(() => {
-    console.log(username, password);
-    dispatch(loginAction(username, password));
+    // console.log(username, password);
+    dispatch(
+      loginAction({
+        username,
+        password,
+      })
+    );
   }, [username, password]);
 
   return (

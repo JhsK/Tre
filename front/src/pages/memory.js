@@ -1,7 +1,8 @@
 import React from "react";
+import FullCalendarTest from "../components/FullCalendarTest";
 
 const memory = () => {
-  return <div>테스트 입니다.</div>;
+  return <FullCalendarTest />;
 };
 
 export default memory;

@@ -18,13 +18,13 @@ export const logoutAction = (data) => {
   };
 };
 
-const reducer = (state = initialState, action) => {
+const user = (state = initialState, action) => {
   switch (action.type) {
     case "LOG_IN":
       return {
         ...state,
         isLoggedIn: true,
-        user: action.user,
+        user: action.data,
       };
     case "LOG_OUT":
       return {
@@ -37,4 +37,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default user;
