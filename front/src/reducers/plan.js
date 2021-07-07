@@ -9,13 +9,6 @@ export const initialState = {
   ],
 };
 
-// export const initialState = {
-//   planData: [{
-//     title: {},
-//     start:
-//   }]
-// }
-
 export const planAddAction = (data) => {
   return {
     type: "PLAN_ADD",

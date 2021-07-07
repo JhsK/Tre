@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { Menu } from "antd";
 import {
   ScheduleOutlined,
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
 import { logoutAction } from "../reducers/user";
+import { scheduleAction, calendarAction, memoryAction } from "../reducers/menu";
 
 const { SubMenu } = Menu;
 
@@ -21,7 +22,24 @@ const LogoImg = styled.img`
 
 const MenuComponents = () => {
   const dispatch = useDispatch();
-  const onClicedLogout = useCallback(() => {
+
+  const onClickMenu = useCallback((key) => {
+    switch (key.key) {
+      case "1":
+        dispatch(scheduleAction);
+        break;
+      case "2":
+        dispatch(calendarAction);
+        break;
+      case "3":
+        dispatch(memoryAction);
+        break;
+      default:
+        console.log("swith");
+    }
+  }, []);
+
+  const onClickedLogout = useCallback(() => {
     dispatch(logoutAction());
   }, []);
   return (
@@ -31,6 +49,7 @@ const MenuComponents = () => {
         defaultSelectedKeys={["1"]}
         mode="inline"
         theme="light"
+        onClick={onClickMenu}
       >
         <LogoImg src="image/logo.png" alt="logo" />
         <Menu.Item
@@ -68,7 +87,7 @@ const MenuComponents = () => {
           }}
         >
           <Menu.Item key="4">내 정보</Menu.Item>
-          <Menu.Item key="5" onClick={() => onClicedLogout()}>
+          <Menu.Item key="5" onClick={() => onClickedLogout()}>
             로그아웃
           </Menu.Item>
         </SubMenu>
