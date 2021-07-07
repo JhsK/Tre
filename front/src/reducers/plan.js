@@ -1,10 +1,12 @@
 export const initialState = {
-  planData: {
-    title: "",
-    start: "",
-    end: "",
-    dateValue: "",
-  },
+  planData: [
+    {
+      title: "",
+      start: "",
+      end: "",
+      dateValue: "",
+    },
+  ],
 };
 
 // export const initialState = {
@@ -33,7 +35,7 @@ const plan = (state = initialState, action) => {
     case "PLAN_ADD":
       return {
         ...state,
-        planData: action.data,
+        planData: [...state.planData, action.data],
       };
     case "PLAN_UPDATE":
       return {

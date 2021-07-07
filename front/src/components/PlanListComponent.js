@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Badge, Button, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,11 +23,30 @@ const PlanListComponent = () => {
     dispatch(planUpdateAction(updateTitle));
   }, [updateTitle]);
 
+  console.log(planData);
+
   return (
     <PlanListStyled>
-      <Badge status="success" />
-      {/* <span>{planData.title}</span> */}
-      <Input
+      {planData.map((item, i) => {
+        if (i !== 0) {
+          return (
+            <>
+              <Badge status="success" key={item.title} />
+              <Input
+                defaultValue={item.title}
+                style={{ width: "80%", paddingLeft: "0px" }}
+                //value={planData.title}
+                onChange={onChangeTitle}
+                key={item.titlei}
+              />
+              <Button type="text" onClick={onSubmitUpdate} key={item.title}>
+                수정
+              </Button>
+            </>
+          );
+        }
+      })}
+      {/* <Input
         defaultValue={planData.title}
         style={{ width: "80%" }}
         //value={planData.title}
@@ -35,7 +54,7 @@ const PlanListComponent = () => {
       />
       <Button type="text" onClick={onSubmitUpdate}>
         수정
-      </Button>
+      </Button> */}
     </PlanListStyled>
   );
 };

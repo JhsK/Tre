@@ -31,7 +31,7 @@ const FullCalendarTest = () => {
   const handleCancel = useCallback(() => {
     setModalVisible(false);
   }, []);
-  console.log(start);
+  console.log(planData[1]);
 
   const handleOk = useCallback(() => {
     setModalVisible(false);
@@ -43,6 +43,7 @@ const FullCalendarTest = () => {
         dateValue,
       })
     );
+    setTitle("");
     console.log(title, dateValue);
   }, [title, dateValue]);
 
@@ -65,15 +66,18 @@ const FullCalendarTest = () => {
         initialView="dayGridMonth"
         height="90%"
         dateClick={onClickedDate}
-        events={[planData]}
+        events={planData}
+        displayEventTime={false}
       />
       <Modal
         title="일정 추가"
         visible={modalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        cancelText="취소"
+        okText="추가"
       >
-        {planData.title && <PlanListComponent />}
+        {planData[1] && <PlanListComponent />}
         <DatePicker
           selected={start}
           onChange={(date) => setStart(date)}
