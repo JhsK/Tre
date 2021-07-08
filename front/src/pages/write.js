@@ -1,7 +1,15 @@
 import React from "react";
+import MemoryWriteComponent from "../components/MemoryWriteComponent";
+import MenuComponents from "../components/MenuComponents";
+import { ScheduleContainer } from "./schedule";
 
 const write = () => {
-  return <div>테스트입니다.</div>;
+  return (
+    <ScheduleContainer>
+      <MenuComponents />
+      <MemoryWriteComponent />
+    </ScheduleContainer>
+  );
 };
 
 export default write;
