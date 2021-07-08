@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
 import { logoutAction } from "../reducers/user";
@@ -21,6 +21,7 @@ const LogoImg = styled.img`
 `;
 
 const MenuComponents = () => {
+  const menuActiveValue = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
   const onClickMenu = useCallback((key) => {

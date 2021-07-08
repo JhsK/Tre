@@ -10,14 +10,14 @@ const tabContents = {
   1: <PastPlanComponent />,
 };
 
-const StyledBackground = styled.div`
+export const StyledBackground = styled.div`
   background-color: #dfe6ed;
   position: relative;
   width: 90%;
   height: 100%;
 `;
 
-const FrameStyled = styled.div`
+export const FrameStyled = styled.div`
   background-color: #fff;
   width: 90%;
   height: 85%;

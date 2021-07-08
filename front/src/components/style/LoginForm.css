@@ -45,7 +45,7 @@
   border-bottom: 1px solid #d9d9d9;
 }
 
-.ant-menu-item-selected {
+/* .ant-menu-item-selected {
   color: #000 !important;
   background-color: #fff !important;
 }
@@ -56,4 +56,4 @@
 
 .ant-menu-item::after {
   border: none !important;
-}
+} */
