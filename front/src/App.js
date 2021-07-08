@@ -6,6 +6,7 @@ import PasswordFind from "./pages/passwordFind";
 import Schedule from "./pages/schedule";
 import Calendar from "./pages/calendar";
 import Memory from "./pages/memory";
+import Write from "./pages/write";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/password" component={PasswordFind} exact={true} />
       <Route path="/calendar" component={Calendar} exact />
       <Route path="/memory" component={Memory} exact />
+      <Route path="/memory/write" component={Write} exact />
     </>
   );
 };
