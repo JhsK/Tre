@@ -39,7 +39,6 @@ const MemoryLayout = () => {
         />
         <CardContainer>
           <Card
-            // style={{ width: 300 }}
             className="card-item"
             cover={
               <img
@@ -56,7 +55,6 @@ const MemoryLayout = () => {
             <Meta title="Card title" description="This is the description" />
           </Card>
           <Card
-            // style={{ width: 300 }}
             className="card-item"
             cover={
               <img
@@ -73,7 +71,6 @@ const MemoryLayout = () => {
             <Meta title="Card title" description="This is the description" />
           </Card>
           <Card
-            // style={{ width: 300 }}
             className="card-item"
             cover={
               <img
@@ -90,7 +87,6 @@ const MemoryLayout = () => {
             <Meta title="Card title" description="This is the description" />
           </Card>
           <Card
-            // style={{ width: 300 }}
             className="card-item"
             cover={
               <img
@@ -107,7 +103,6 @@ const MemoryLayout = () => {
             <Meta title="Card title" description="This is the description" />
           </Card>
           <Card
-            // style={{ width: 300 }}
             className="card-item"
             cover={
               <img

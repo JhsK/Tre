@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { Menu } from "antd";
 import {
   ScheduleOutlined,
@@ -7,7 +7,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
@@ -21,6 +21,12 @@ const LogoImg = styled.img`
 `;
 
 const MenuComponents = () => {
+  const activeStyle = {
+    color: "#1890ff",
+    // borderRight: "3px solide #1890ff",
+    // background: "#1890ff",
+  };
+
   const menuActiveValue = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
@@ -58,21 +64,27 @@ const MenuComponents = () => {
           icon={<ScheduleOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          <Link to="/">계획</Link>
+          <NavLink activeStyle={activeStyle} to="/">
+            계획
+          </NavLink>
         </Menu.Item>
         <Menu.Item
           key="2"
           icon={<CalendarOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          <Link to="/calendar">달력</Link>
+          <NavLink activeStyle={activeStyle} to="/calendar">
+            달력
+          </NavLink>
         </Menu.Item>
         <Menu.Item
           key="3"
           icon={<HourglassOutlined style={{ fontSize: "1rem" }} />}
           style={{ fontSize: "1rem", marginBottom: "2rem" }}
         >
-          <Link to="memory">추억</Link>
+          <NavLink activeStyle={activeStyle} to="/memory">
+            추억
+          </NavLink>
         </Menu.Item>
         <SubMenu
           key="sub1"
