@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# 📅 Tre 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To Record Everything - 일정 관리 사이트
+📌 다양한 todo-list나 일정 관리 프로그램 사이트가 있지만 나에게 맞지 않는 사람!
 
-## Available Scripts
 
-In the project directory, you can run:
+📌 기능이 너무 많아 혼랍스럽고 불편하거나, 내가 필요한 기능이 없는 사람!
 
-### `yarn start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ⏰ 개발 기간
+- 2021.06.28 ~ 개발중
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `yarn test`
+## 🔨 기술 스택
+- Front
+  - React
+  - Redux
+  - Axios
+  - React-saga
+  - Ant design
+  - Styled-components
+  - FullCalendar
+  - React-datepicker
+  - Kakao Login API
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Back
+  - Express
+  - Passport
+  - MySQL
+  - Sequelize
+  - Multer
+  
+  <br>
+  
+## 📄 기획 및 설계
+ - 🖥 [화면 설계서](https://whimsical.com/tre-5wLaojqAbXzzNZWW5z2gqX)
+ - ⚙ [기능 명세서](https://www.notion.so/difunto/ac01f0efd7eb4b35983bf17234bf0e5a)
+ - 🗂 [DB 명세서](https://www.notion.so/difunto/DB-824da7f74d7640ae9dc1f1435f2fbf8a)
+ - 📬 API 명세서
