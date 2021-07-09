@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 
 import { PageHeader, Button, Form, Input, Rate, Upload, Modal } from "antd";
@@ -16,6 +16,11 @@ const FormContainer = styled.div`
 `;
 
 const MemoryWriteComponent = () => {
+  const [modalState, setModalState] = useState(true);
+  const modalCancel = useCallback(() => {
+    setModalState((prev) => !prev);
+  }, []);
+
   return (
     <StyledBackground>
       <FrameStyled>
@@ -51,6 +56,14 @@ const MemoryWriteComponent = () => {
                 </div>
               )}
             </Upload>
+            <Modal
+              visible={modalState}
+              title="미리보기"
+              footer={null}
+              onCancel={modalCancel}
+            >
+              <img alt="example" style={{ width: "100%" }} />
+            </Modal>
             <Button style={{ float: "right" }}>작성하기</Button>
           </Form>
         </FormContainer>
