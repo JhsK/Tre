@@ -59,6 +59,7 @@ const MenuComponents = () => {
         onClick={onClickMenu}
       >
         <LogoImg src="image/logo.png" alt="logo" />
+        {/* ../image/logo.png */}
         <Menu.Item
           key="1"
           icon={<ScheduleOutlined style={{ fontSize: "1rem" }} />}
