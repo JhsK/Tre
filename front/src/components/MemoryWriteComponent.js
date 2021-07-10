@@ -15,8 +15,28 @@ const FormContainer = styled.div`
   margin-top: 3rem;
 `;
 
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
+
 const MemoryWriteComponent = () => {
-  const [modalState, setModalState] = useState(true);
+  const [modalState, setModalState] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+
+  const handlePreview = useCallback(async (file) => {
+    console.log(file);
+    // if (!file.url && !file.preview) {
+    //   file.preview = await getBase64(file.originFilobj);
+    // }
+    setModalState((prev) => !prev);
+    setPreviewImage(file.url || file.preview);
+  }, []);
+
   const modalCancel = useCallback(() => {
     setModalState((prev) => !prev);
   }, []);
@@ -46,7 +66,7 @@ const MemoryWriteComponent = () => {
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture-card"
               //fileList={fileList}
-              // onPreview={this.handlePreview}
+              onPreview={handlePreview}
               // onChange={this.handleChange}
             >
               {false ? null : (
@@ -62,7 +82,7 @@ const MemoryWriteComponent = () => {
               footer={null}
               onCancel={modalCancel}
             >
-              <img alt="example" style={{ width: "100%" }} />
+              <img alt="example" style={{ width: "100%" }} src={previewImage} />
             </Modal>
             <Button style={{ float: "right" }}>작성하기</Button>
           </Form>
