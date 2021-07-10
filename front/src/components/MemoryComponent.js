@@ -57,7 +57,9 @@ const MemoryLayout = () => {
               <DeleteOutlined key="delete" />,
             ]}
           >
-            <Meta title="Card title" description="This is the description" />
+            <Link to="/memory/test">
+              <Meta title="Card title" description="This is the description" />
+            </Link>
           </Card>
         </CardContainer>
       </FrameStyled>
