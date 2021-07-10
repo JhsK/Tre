@@ -7,7 +7,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
@@ -21,6 +21,11 @@ const LogoImg = styled.img`
 `;
 
 const MenuComponents = () => {
+  const history = useHistory();
+  const pathURL = history.location.pathname;
+  const imgSrcOneDepth = "image/logo.png";
+  const imgSrcTwoDepth = "../image/logo.png";
+
   const activeStyle = {
     color: "#1890ff",
     // borderRight: "3px solide #1890ff",
@@ -58,7 +63,14 @@ const MenuComponents = () => {
         theme="light"
         onClick={onClickMenu}
       >
-        <LogoImg src="image/logo.png" alt="logo" />
+        <LogoImg
+          src={
+            pathURL === "/memory/test" || pathURL === "/memory/write"
+              ? imgSrcTwoDepth
+              : imgSrcOneDepth
+          }
+          alt="logo"
+        />
         {/* ../image/logo.png */}
         <Menu.Item
           key="1"
