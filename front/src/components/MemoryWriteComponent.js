@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { PageHeader, Button, Form, Input, Rate, Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
+import useInput from "../hooks/useInput";
 
 const { TextArea } = Input;
 
@@ -13,6 +14,17 @@ const FormContainer = styled.div`
   width: 100%;
   align-items: center;
   margin-top: 3rem;
+
+  .write-submit-btn {
+    float: right;
+    position: absolute;
+    bottom: 130px;
+    right: 184px;
+  }
+`;
+
+const UploadContainer = styled.div`
+  width: 75%;
 `;
 
 function getBase64(file) {
@@ -27,6 +39,17 @@ function getBase64(file) {
 const MemoryWriteComponent = () => {
   const [modalState, setModalState] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+  const [rateValue, SetRateValue] = useState(0);
+  const [writeTitle, onChangeWriteTitle] = useInput("");
+  const [writeContent, onChangeWriteContent] = useInput("");
+
+  const onSubmitWrite = useCallback(() => {
+    console.log(writeTitle, writeContent, rateValue);
+  }, [writeTitle, writeContent, rateValue]);
+
+  const onChangeRate = useCallback((value) => {
+    SetRateValue(value);
+  }, []);
 
   const handlePreview = useCallback(async (file) => {
     console.log(file);
@@ -56,12 +79,39 @@ const MemoryWriteComponent = () => {
           <Form
             name="postWrite"
             style={{ width: "75%" }}
-            //onFinish={onFinish}
-            encType="multipart/form-data"
+            onFinish={onSubmitWrite}
           >
-            <Input placeholder="제목" size="large" />
-            <TextArea rows={15} style={{ margin: "2rem 0 1rem 0" }} />
-            <Rate style={{ marginBottom: "2rem" }} />
+            <Form.Item name="title">
+              <Input
+                placeholder="제목"
+                size="large"
+                value={writeTitle}
+                onChange={onChangeWriteTitle}
+                name="title"
+              />
+            </Form.Item>
+            <Form.Item name="content">
+              <TextArea
+                rows={15}
+                style={{ margin: "2rem 0 1rem 0" }}
+                value={writeContent}
+                onChange={onChangeWriteContent}
+                name="content"
+              />
+            </Form.Item>
+            <Form.Item name="score">
+              <Rate
+                style={{ marginBottom: "2rem" }}
+                value={rateValue}
+                onChange={onChangeRate}
+                name="score"
+              />
+            </Form.Item>
+            <Form.Item className="write-submit-btn">
+              <Button htmlType="submit">작성하기</Button>
+            </Form.Item>
+          </Form>
+          <UploadContainer>
             <Upload
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture-card"
@@ -84,8 +134,7 @@ const MemoryWriteComponent = () => {
             >
               <img alt="example" style={{ width: "100%" }} src={previewImage} />
             </Modal>
-            <Button style={{ float: "right" }}>작성하기</Button>
-          </Form>
+          </UploadContainer>
         </FormContainer>
       </FrameStyled>
     </StyledBackground>
