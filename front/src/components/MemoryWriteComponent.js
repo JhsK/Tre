@@ -5,6 +5,8 @@ import { PageHeader, Button, Form, Input, Rate, Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import useInput from "../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { postAddAction } from "../reducers/write";
 
 const { TextArea } = Input;
 
@@ -37,6 +39,7 @@ function getBase64(file) {
 }
 
 const MemoryWriteComponent = () => {
+  const dispatch = useDispatch();
   const [modalState, setModalState] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [rateValue, SetRateValue] = useState(0);
@@ -44,6 +47,7 @@ const MemoryWriteComponent = () => {
   const [writeContent, onChangeWriteContent] = useInput("");
 
   const onSubmitWrite = useCallback(() => {
+    dispatch(postAddAction({ writeTitle, writeContent, rateValue }));
     console.log(writeTitle, writeContent, rateValue);
   }, [writeTitle, writeContent, rateValue]);
 
