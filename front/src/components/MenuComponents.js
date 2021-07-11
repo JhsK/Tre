@@ -11,7 +11,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
-import { logoutAction } from "../reducers/user";
+import { logoutRequestAction } from "../reducers/user";
 import { scheduleAction, calendarAction, memoryAction } from "../reducers/menu";
 
 const { SubMenu } = Menu;
@@ -52,7 +52,7 @@ const MenuComponents = () => {
   }, []);
 
   const onClickedLogout = useCallback(() => {
-    dispatch(logoutAction());
+    dispatch(logoutRequestAction());
   }, []);
   return (
     <>

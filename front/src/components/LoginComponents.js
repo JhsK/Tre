@@ -2,12 +2,12 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import LoginForm from "./style/LoginForm.css";
 import useInput from "../hooks/useInput";
-import { loginAction } from "../reducers/user";
+import { loginRequestAction } from "../reducers/user";
 
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const KakaoBtn = styled.button`
   width: 100%;
@@ -22,13 +22,14 @@ const KakaoBtn = styled.button`
 
 const LoginComponents = () => {
   const dispatch = useDispatch();
+  const { isLoggingIn } = useSelector((state) => state.user);
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
 
   const onSubmitLogin = useCallback(() => {
     // console.log(username, password);
     dispatch(
-      loginAction({
+      loginRequestAction({
         username,
         password,
       })
@@ -90,6 +91,7 @@ const LoginComponents = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            loading={isLoggingIn}
           >
             로그인
           </Button>
