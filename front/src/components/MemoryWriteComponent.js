@@ -6,7 +6,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { postAddAction } from "../reducers/write";
+import { addPost } from "../reducers/post";
 
 const { TextArea } = Input;
 
@@ -47,7 +47,13 @@ const MemoryWriteComponent = () => {
   const [writeContent, onChangeWriteContent] = useInput("");
 
   const onSubmitWrite = useCallback(() => {
-    dispatch(postAddAction({ writeTitle, writeContent, rateValue }));
+    dispatch(
+      addPost({
+        title: writeTitle,
+        content: writeContent,
+        rate: rateValue,
+      })
+    );
     console.log(writeTitle, writeContent, rateValue);
   }, [writeTitle, writeContent, rateValue]);
 

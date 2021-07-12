@@ -22,32 +22,53 @@ export const initialState = {
     },
   ],
   imagePaths: [],
-  postAdded: false,
+  addPostLoading: false,
+  addPostDone: false,
+  addPostError: null,
 };
 
-const ADD_POST = "ADD_POST";
+export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
+export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
+export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 
-export const addPost = {
-  type: ADD_POST,
-};
+export const addPost = (data) => ({
+  type: ADD_POST_REQUEST,
+  data,
+});
 
-const dummyPost = {
+const dummyPost = (data) => ({
   id: 2,
-  content: "더미테이버입니다.",
+  title: data.title,
+  content: data.content,
+  rate: data.rate,
   User: {
     id: 1,
     nickname: "JhsK",
   },
   Images: [],
-};
+});
 
 const post = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST_REQUEST:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
-        postAdded: true,
+        addPostLoading: true,
+        addPostDone: false,
+        addPostError: null,
+      };
+    case ADD_POST_SUCCESS:
+      return {
+        ...state,
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
+        addPostLoading: false,
+        addPostDone: true,
+      };
+    case ADD_POST_FAILURE:
+      return {
+        ...state,
+        addPostLoading: false,
+        addPostError: action.error,
       };
     default:
       return state;
