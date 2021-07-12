@@ -12,10 +12,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const { logInDone } = useSelector((state) => state.user);
   return (
     <>
-      {isLoggedIn ? (
+      {logInDone ? (
         <Route path="/" component={Schedule} exact={true} />
       ) : (
         <Route path="/" component={Login} exact={true} />
