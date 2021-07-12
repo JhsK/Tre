@@ -22,7 +22,7 @@ const KakaoBtn = styled.button`
 
 const LoginComponents = () => {
   const dispatch = useDispatch();
-  const { isLoggingIn } = useSelector((state) => state.user);
+  const { logInLoading } = useSelector((state) => state.user);
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
 
@@ -91,7 +91,7 @@ const LoginComponents = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            loading={isLoggingIn}
+            loading={logInLoading}
           >
             로그인
           </Button>

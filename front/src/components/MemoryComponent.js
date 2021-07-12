@@ -9,6 +9,9 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
+import { useSelector } from "react-redux";
+import post from "../reducers/post";
+import PostImages from "./PostImages";
 
 const { Meta } = Card;
 
@@ -27,6 +30,7 @@ const CardContainer = styled.div`
 `;
 
 const MemoryLayout = () => {
+  const { mainPosts } = useSelector((state) => state.post);
   return (
     <StyledBackground>
       <FrameStyled>
@@ -43,7 +47,23 @@ const MemoryLayout = () => {
           style={{ borderBottom: "1px solid #f3f3f3" }}
         />
         <CardContainer>
-          <Card
+          {mainPosts.map((post, index) => (
+            <Card
+              key={post.id}
+              className="card-item"
+              cover={post.Images[0] && <PostImages images={post.Images} />}
+              actions={[
+                <SettingOutlined key="setting" />,
+                <EditOutlined key="edit" />,
+                <DeleteOutlined key="delete" />,
+              ]}
+            >
+              <Link to="/memory/test">
+                <Meta title={post.title} description={post.content} />
+              </Link>
+            </Card>
+          ))}
+          {/* <Card
             className="card-item"
             cover={
               <img
@@ -58,9 +78,9 @@ const MemoryLayout = () => {
             ]}
           >
             <Link to="/memory/test">
-              <Meta title="Card title" description="This is the description" />
+              <Meta title="Card title" description={post.content} />
             </Link>
-          </Card>
+          </Card> */}
         </CardContainer>
       </FrameStyled>
     </StyledBackground>
