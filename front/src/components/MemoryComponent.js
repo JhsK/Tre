@@ -58,6 +58,7 @@ const MemoryLayout = () => {
                   <img
                     src="https://images.unsplash.com/photo-1608745644869-8a57e8461906?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80"
                     alt="cover"
+                    style={{ maxHeight: "200px" }}
                   />
                 )
               }
@@ -67,29 +68,11 @@ const MemoryLayout = () => {
                 <DeleteOutlined key="delete" />,
               ]}
             >
-              <Link to="/memory/test">
+              <Link to={`/memory/${post.id}`} text="test">
                 <Meta title={post.title} description={post.content} />
               </Link>
             </Card>
           ))}
-          {/* <Card
-            className="card-item"
-            cover={
-              <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-              />
-            }
-            actions={[
-              <SettingOutlined key="setting" />,
-              <EditOutlined key="edit" />,
-              <DeleteOutlined key="delete" />,
-            ]}
-          >
-            <Link to="/memory/test">
-              <Meta title="Card title" description={post.content} />
-            </Link>
-          </Card> */}
         </CardContainer>
       </FrameStyled>
     </StyledBackground>

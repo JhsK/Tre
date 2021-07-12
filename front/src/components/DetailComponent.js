@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import { PageHeader, Rate } from "antd";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 const DetailContainer = styled.div`
   width: 600px;
@@ -14,7 +16,11 @@ const DetailContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const DetailComponent = () => {
+const DetailComponent = ({ text }) => {
+  const { id } = useParams();
+  const { mainPosts } = useSelector((state) => state.post);
+  const post = mainPosts.filter((a, i) => a.id === 1);
+
   return (
     <StyledBackground>
       <FrameStyled>
@@ -27,7 +33,7 @@ const DetailComponent = () => {
         />
         <DetailContainer>
           <PageHeader
-            title="테스트 게시글 입니다."
+            title={post[0].title}
             avatar={{
               src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
             }}
@@ -38,13 +44,11 @@ const DetailComponent = () => {
             alt="test"
             style={{ width: "100%", height: "400px" }}
           />
-          <Rate style={{ padding: "0 20px", margin: "1rem 0" }} />
-          <div style={{ padding: "0 20px" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-            voluptates earum totam, sed unde, expedita aliquam minima at quos
-            similique architecto nesciunt adipisci delectus possimus cumque,
-            accusamus laudantium facilis temporibus.
-          </div>
+          <Rate
+            value={post[0].rate}
+            style={{ padding: "0 20px", margin: "1rem 0" }}
+          />
+          <div style={{ padding: "0 20px" }}>{post[0].content}</div>
         </DetailContainer>
       </FrameStyled>
     </StyledBackground>

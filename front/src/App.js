@@ -25,7 +25,7 @@ const App = () => {
       <Route path="/calendar" component={Calendar} exact />
       <Route path="/memory" component={Memory} exact />
       <Route path="/memory/write" component={Write} exact />
-      <Route path="/memory/test" component={Detail} exact />
+      <Route path="/memory/:id" component={Detail} exact />
     </>
   );
 };

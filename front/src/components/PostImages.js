@@ -23,7 +23,12 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <>
-        <img src={images[0].src} alt={images[0].src} onClick={onZoom} />
+        <img
+          src={images[0].src}
+          alt={images[0].src}
+          onClick={onZoom}
+          style={{ maxHeight: "200px" }}
+        />
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
     );
@@ -33,13 +38,13 @@ const PostImages = ({ images }) => {
       <>
         <img
           src={images[0].src}
-          style={{ width: "50%", display: "inline-block" }}
+          style={{ width: "50%", display: "inline-block", maxHeight: "200px" }}
           alt={images[0].src}
           onClick={onZoom}
         />
         <img
           src={images[1].src}
-          style={{ width: "50%", display: "inline-block" }}
+          style={{ width: "50%", display: "inline-block", maxHeight: "200px" }}
           alt={images[1].src}
           onClick={onZoom}
         />
@@ -55,6 +60,7 @@ const PostImages = ({ images }) => {
           width="50%"
           alt={images[0].src}
           onClick={onZoom}
+          style={{ maxHeight: "200px" }}
         />
         <ImagesContainer onClick={onZoom}>
           <PlusOutlined />
