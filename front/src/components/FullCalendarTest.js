@@ -31,7 +31,6 @@ const FullCalendarTest = () => {
   const handleCancel = useCallback(() => {
     setModalVisible(false);
   }, []);
-  console.log(planData[1]);
 
   const handleOk = useCallback(() => {
     setModalVisible(false);
@@ -44,10 +43,10 @@ const FullCalendarTest = () => {
       })
     );
     setTitle("");
-    console.log(title, dateValue);
   }, [title, dateValue]);
 
   const onClickedDate = useCallback((dateClickInfo) => {
+    console.log(dateClickInfo.dateStr);
     setDateValue(dateClickInfo.dateStr);
     setStart(dateClickInfo.date);
     setEnd(dateClickInfo.date);
@@ -77,7 +76,7 @@ const FullCalendarTest = () => {
         cancelText="취소"
         okText="추가"
       >
-        {planData[1] && <PlanListComponent />}
+        {<PlanListComponent dateValue={dateValue} />}
         <DatePicker
           selected={start}
           onChange={(date) => setStart(date)}

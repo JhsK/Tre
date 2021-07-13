@@ -1,10 +1,10 @@
 export const initialState = {
   planData: [
     {
-      title: "",
-      start: "",
-      end: "",
-      dateValue: "",
+      title: "첫 번째 일정입니다.",
+      start: "2021-07-14T15:00:00.000Z",
+      end: "2021-07-14T15:00:00.000Z",
+      dateValue: "2021-07-15",
     },
   ],
 };
