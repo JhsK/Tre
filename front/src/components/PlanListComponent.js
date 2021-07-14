@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import useInput from "../hooks/useInput";
-import { planUpdateAction } from "../reducers/plan";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import plan, { planUpdateAction } from "../reducers/plan";
 import { Badge, Button, Input } from "antd";
-import PlanWriteList from "./PlanWriteList";
 
 const PlanListStyled = styled.div`
   width: 100%;
@@ -15,25 +14,34 @@ const PlanListStyled = styled.div`
   }
 `;
 
-const PlanListContainer = styled.div`
-  width: 100%;
-`;
-
 const PlanListComponent = ({ dateValue }) => {
-  const dispatch = useDispatch();
-  const [updateTitle, onChangeTitle] = useInput("");
+  const history = useHistory();
   const { planData } = useSelector((state) => state.plan);
+  console.log(planData);
   const [planList, setPlanList] = useState("");
-  //const writedPlan = planData.filter((a, i) => a.dateValue === dateValue);
 
-  const onSubmitUpdate = useCallback(() => {
-    dispatch(planUpdateAction(updateTitle));
-  }, [updateTitle]);
+  // const onSubmitUpdate = useCallback(
+  //   (planId) => {
+  //     dispatch(planUpdateAction(updateTitle, planId));
+  //   },
+  //   [updateTitle]
+  // );
 
   useEffect(() => {
-    console.log(planData);
     setPlanList(planData.filter((a, i) => a.dateValue === dateValue));
-  }, [planList]);
+  }, [planData]);
+
+  console.log(planList);
+
+  const onClickUpdate = useCallback(
+    (key) => {
+      history.push({
+        pathname: `/calendar/${key}`,
+        state: { planList: planList },
+      });
+    },
+    [planList]
+  );
 
   return (
     <>
@@ -45,15 +53,17 @@ const PlanListComponent = ({ dateValue }) => {
               //defaultValue={item.title}
               style={{ width: "80%", paddingLeft: "0px" }}
               value={item.title}
-              onChange={onChangeTitle}
               key={i}
             />
-            <Button type="text" onClick={onSubmitUpdate} key={i}>
+            <Button
+              type="text"
+              onClick={() => onClickUpdate(item.id)}
+              key={item.id}
+            >
               수정
             </Button>
           </PlanListStyled>
         ))}
-      {/* <PlanWriteList dateValue={dateValue} /> */}
     </>
   );
 };

@@ -36,6 +36,7 @@ const FullCalendarTest = () => {
     setModalVisible(false);
     dispatch(
       planAddAction({
+        id: 3,
         start,
         end,
         title,
@@ -46,7 +47,6 @@ const FullCalendarTest = () => {
   }, [title, dateValue]);
 
   const onClickedDate = useCallback((dateClickInfo) => {
-    console.log(dateClickInfo.dateStr);
     setDateValue(dateClickInfo.dateStr);
     setStart(dateClickInfo.date);
     setEnd(dateClickInfo.date);
