@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { PageHeader, Button, Input } from "antd";
 import DatePicker from "react-datepicker";
+import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { planUpdateAction } from "../reducers/plan";
@@ -63,12 +64,13 @@ const BtnContainer = styled.div`
 const PlanUpdateLayout = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
+
   const planList = location.state.planList;
-  console.log(planList);
   const [start, setStart] = useState(planList[0].start);
   const [end, setEnd] = useState(planList[0].end);
   const [title, setTitle] = useState("");
-  console.log(start);
+
   const onChangePlanText = useCallback((e) => {
     e.preventDefault();
     setTitle(e.target.value);
@@ -84,6 +86,7 @@ const PlanUpdateLayout = () => {
         dateValue: start,
       })
     );
+    history.push("/calendar");
   }, [title, start, end]);
 
   return (

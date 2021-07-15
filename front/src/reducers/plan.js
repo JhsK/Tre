@@ -41,22 +41,14 @@ const plan = (state = initialState, action) => {
         planData: [...state.planData, action.data],
       };
     case "PLAN_UPDATE":
-      let data = state.planData.filter((a) => a.id === action.data.id);
-      data = {
-        ...data[0],
-        title: action.data.title,
-        start: action.data.start,
-        end: action.data.end,
-        dateValue: action.data.dateValue,
-      };
-      console.log(data);
-      state = {
-        ...state,
-        planData: [data],
-      };
+      //let data = state.planData.filter((a) => a.id === action.data.id);
+      const planData = [...state.planData];
+      const idx = state.planData.findIndex((a) => a.id === action.data.id);
+      planData[idx] = action.data;
+      console.log(planData);
       return {
         ...state,
-        planData: [...state.planData],
+        planData: [...planData],
       };
     default:
       return state;
