@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { planAddAction } from "../reducers/plan";
+import { addPlan } from "../reducers/plan";
 import PlanListComponent from "./PlanListComponent";
 
 import FullCalendar from "@fullcalendar/react";
@@ -35,7 +35,7 @@ const FullCalendarTest = () => {
   const handleOk = useCallback(() => {
     setModalVisible(false);
     dispatch(
-      planAddAction({
+      addPlan({
         id: 3,
         start,
         end,

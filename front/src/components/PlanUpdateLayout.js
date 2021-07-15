@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
-import { planUpdateAction } from "../reducers/plan";
+import { updatePlan } from "../reducers/plan";
 
 const Global = createGlobalStyle`
     .ant-page-header {
@@ -78,12 +78,12 @@ const PlanUpdateLayout = () => {
 
   const onSubmitUpdate = useCallback(() => {
     dispatch(
-      planUpdateAction({
+      updatePlan({
         id: 3,
         title,
         start,
         end,
-        dateValue: start,
+        dateValue: planList[0].dateValue,
       })
     );
     history.push("/calendar");

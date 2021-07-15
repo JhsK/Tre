@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import plan, { planUpdateAction } from "../reducers/plan";
 import { Badge, Button, Input } from "antd";
 
 const PlanListStyled = styled.div`
@@ -18,18 +17,13 @@ const PlanListComponent = ({ dateValue }) => {
   const history = useHistory();
   const { planData } = useSelector((state) => state.plan);
   console.log(planData);
+  console.log(dateValue);
   const [planList, setPlanList] = useState("");
 
-  // const onSubmitUpdate = useCallback(
-  //   (planId) => {
-  //     dispatch(planUpdateAction(updateTitle, planId));
-  //   },
-  //   [updateTitle]
-  // );
-
   useEffect(() => {
+    console.log("list rendering");
     setPlanList(planData.filter((a, i) => a.dateValue === dateValue));
-  }, [planData]);
+  }, [dateValue, planData]);
 
   console.log(planList);
 
