@@ -1,3 +1,5 @@
+import shortId from "shortid";
+
 export const initialState = {
   mainPosts: [
     {
@@ -37,10 +39,10 @@ export const addPost = (data) => ({
 });
 
 const dummyPost = (data) => ({
-  id: 2,
-  title: data.title,
-  content: data.content,
-  rate: data.rate,
+  id: data.id,
+  title: data.dummy.title,
+  content: data.dummy.content,
+  rate: data.dummy.rate,
   User: {
     id: 1,
     nickname: "JhsK",

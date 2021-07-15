@@ -9,6 +9,7 @@ export const initialState = {
   signUpDone: false,
   signUpError: null,
   user: null,
+  Posts: [{ id: 1 }],
   signUpData: {},
   loginData: {},
 };
@@ -24,6 +25,9 @@ export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 export const SIGN_UP_REQUEST = "SING_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SING_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SING_UP_FAILURE";
+
+export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
+export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
 export const loginRequestAction = (data) => {
   return {
@@ -99,6 +103,11 @@ const user = (state = initialState, action) => {
         ...state,
         signUpLoading: false,
         signUpError: action.error,
+      };
+    case ADD_POST_TO_ME:
+      return {
+        ...state,
+        Posts: [{ id: action.data }, ...state.Posts],
       };
     default:
       return state;
