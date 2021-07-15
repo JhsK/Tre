@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -9,8 +9,8 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
-import { useSelector } from "react-redux";
-import post from "../reducers/post";
+import { useDispatch, useSelector } from "react-redux";
+import { REMOVE_POST_REQUEST } from "../reducers/post";
 import PostImages from "./PostImages";
 
 const { Meta } = Card;
@@ -30,7 +30,15 @@ const CardContainer = styled.div`
 `;
 
 const MemoryLayout = () => {
+  const dispatch = useDispatch();
   const { mainPosts } = useSelector((state) => state.post);
+
+  const onClickDelete = useCallback((postId) => {
+    dispatch({
+      type: REMOVE_POST_REQUEST,
+      data: postId,
+    });
+  }, []);
   return (
     <StyledBackground>
       <FrameStyled>
@@ -63,9 +71,11 @@ const MemoryLayout = () => {
                 )
               }
               actions={[
-                <SettingOutlined key="setting" />,
                 <EditOutlined key="edit" />,
-                <DeleteOutlined key="delete" />,
+                <DeleteOutlined
+                  key="delete"
+                  onClick={() => onClickDelete(post.id)}
+                />,
               ]}
             >
               <Link to={`/memory/${post.id}`} text="test">

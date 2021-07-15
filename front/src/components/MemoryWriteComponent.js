@@ -7,6 +7,7 @@ import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { addPost } from "../reducers/post";
+import { useHistory } from "react-router";
 
 const { TextArea } = Input;
 
@@ -40,6 +41,7 @@ function getBase64(file) {
 
 const MemoryWriteComponent = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [modalState, setModalState] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [rateValue, SetRateValue] = useState(0);
@@ -54,7 +56,7 @@ const MemoryWriteComponent = () => {
         rate: rateValue,
       })
     );
-    console.log(writeTitle, writeContent, rateValue);
+    history.push("/memory");
   }, [writeTitle, writeContent, rateValue]);
 
   const onChangeRate = useCallback((value) => {

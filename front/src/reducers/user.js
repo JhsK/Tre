@@ -109,6 +109,11 @@ const user = (state = initialState, action) => {
         ...state,
         Posts: [{ id: action.data }, ...state.Posts],
       };
+    case REMOVE_POST_OF_ME:
+      return {
+        ...state,
+        Posts: state.Posts.filter((v) => v.id !== action.data),
+      };
     default:
       return state;
   }
