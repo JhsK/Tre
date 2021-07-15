@@ -1,3 +1,5 @@
+import produce from "immer";
+
 export const initialState = {
   planData: [
     {
@@ -46,54 +48,44 @@ export const updatePlan = (data) => {
 };
 
 const plan = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_PLAN_REQUEST:
-      return {
-        ...state,
-        addPlanLoading: true,
-        addPlanDone: false,
-        addPlanError: null,
-      };
-    case ADD_PLAN_SUCCESS:
-      return {
-        ...state,
-        planData: [...state.planData, action.data],
-        addPlanLoading: false,
-        addPlanDone: true,
-      };
-    case ADD_PLAN_FAILURE:
-      return {
-        ...state,
-        addPlanLoading: false,
-        addPlanError: action.error,
-      };
-    case UPDATE_PLAN_REQUEST:
-      return {
-        ...state,
-        updatePlanLoading: true,
-        updatePlanDone: false,
-        updatePlanError: null,
-      };
-    case UPDATE_PLAN_SUCCESS:
-      const planData = [...state.planData];
-      const idx = state.planData.findIndex((a) => a.id === action.data.id);
-      planData[idx] = action.data;
-
-      return {
-        ...state,
-        planData: [...planData],
-        updatePlanLoading: false,
-        updatePlanDone: true,
-      };
-    case UPDATE_PLAN_FAILURE:
-      return {
-        ...state,
-        updatePlanLoading: false,
-        updatePlanError: action.error,
-      };
-    default:
-      return state;
-  }
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case ADD_PLAN_REQUEST:
+        draft.addPlanLoading = true;
+        draft.addPlanDone = false;
+        draft.addPlanError = null;
+        break;
+      case ADD_PLAN_SUCCESS:
+        draft.addPlanLoading = false;
+        draft.addPlanDone = true;
+        draft.planData.push(action.data);
+        break;
+      case ADD_PLAN_FAILURE:
+        draft.addPlanLoading = false;
+        draft.addPlanError = action.error;
+        break;
+      case UPDATE_PLAN_REQUEST:
+        draft.updatePlanLoading = true;
+        draft.updatePlanDone = false;
+        draft.updatePlanError = null;
+        break;
+      case UPDATE_PLAN_SUCCESS:
+        const planData = draft.planData;
+        planData[draft.planData.findIndex((a) => a.id === action.data.id)] =
+          action.data;
+        draft.planData = planData;
+        draft.updatePlanLoading = true;
+        draft.updatePlanDone = false;
+        draft.updatePlanError = null;
+        break;
+      case UPDATE_PLAN_FAILURE:
+        draft.updatePlanLoading = false;
+        draft.updatePlanError = action.error;
+        break;
+      default:
+        return state;
+    }
+  });
 };
 
 export default plan;
