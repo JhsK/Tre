@@ -1,29 +1,14 @@
 import produce from "immer";
+import shortid from "shortid";
+import faker from "faker";
 
 export const initialState = {
-  mainPosts: [
-    {
-      id: 1,
-      User: {
-        id: 1,
-        nickname: "JhsK",
-      },
-      title: "첫 카페 여행",
-      content: "첫 번째 게시글 입니다.",
-      Images: [
-        {
-          src: "https://bookthumb-phinf.pstatic.net/cover/137/995/13799585.jpg?udate=20180726",
-        },
-        {
-          src: "https://gimg.gilbut.co.kr/book/BN001958/rn_view_BN001958.jpg",
-        },
-        {
-          src: "https://gimg.gilbut.co.kr/book/BN001998/rn_view_BN001998.jpg",
-        },
-      ],
-    },
-  ],
+  mainPosts: [],
   imagePaths: [],
+  hasMorePost: true,
+  loadPostLoading: false,
+  loadPostDone: false,
+  loadPostError: null,
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
@@ -31,6 +16,28 @@ export const initialState = {
   removePostDone: false,
   removePostError: null,
 };
+
+export const generateDummyPost = (number) =>
+  Array(number)
+    .fill()
+    .map(() => ({
+      id: shortid.generate(),
+      User: {
+        id: shortid.generate(),
+        nickname: faker.name.findName(),
+      },
+      title: faker.name.title(),
+      content: faker.lorem.paragraph(),
+      Images: [
+        {
+          src: faker.image.image(),
+        },
+      ],
+    }));
+
+export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
+export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
+export const LOAD_POST_FAILURE = "LOAD_POST_FAILURE";
 
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
@@ -60,6 +67,21 @@ const dummyPost = (data) => ({
 const post = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
+      case LOAD_POST_REQUEST:
+        draft.loadPostLoading = true;
+        draft.loadPostDone = false;
+        draft.loadPostError = null;
+        break;
+      case LOAD_POST_SUCCESS:
+        draft.loadPostLoading = false;
+        draft.loadPostDone = true;
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.hasMorePost = draft.mainPosts.length < 50;
+        break;
+      case LOAD_POST_FAILURE:
+        draft.addPostLoading = false;
+        draft.addPostError = action.error;
+        break;
       case ADD_POST_REQUEST:
         draft.addPostLoading = true;
         draft.addPostDone = false;

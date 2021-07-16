@@ -1,37 +1,50 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { PageHeader, Button, Card } from "antd";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { REMOVE_POST_REQUEST } from "../reducers/post";
+import { LOAD_POST_REQUEST, REMOVE_POST_REQUEST } from "../reducers/post";
+import { useInView } from "react-intersection-observer";
 import PostImages from "./PostImages";
 
 const { Meta } = Card;
 
 const CardContainer = styled.div`
   width: 100%;
+  height: calc(100% - 85px);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 2rem 2rem;
   gap: 2rem;
+  overflow-y: scroll;
 
   .card-item {
     width: 23%;
     margin: 0 0rem 0rem 0rem;
+    height: 370px;
   }
 `;
 
 const MemoryLayout = () => {
   const dispatch = useDispatch();
-  const { mainPosts } = useSelector((state) => state.post);
+  const [ref, inView] = useInView();
+  const { mainPosts, hasMorePost, loadPostLoading } = useSelector(
+    (state) => state.post
+  );
+
+  useEffect(() => {
+    if (inView && hasMorePost && !loadPostLoading) {
+      const lastId = mainPosts[mainPosts.length - 1]?.id;
+      dispatch({
+        type: LOAD_POST_REQUEST,
+        lastId,
+      });
+    }
+  }, [inView, hasMorePost, loadPostLoading, mainPosts]);
 
   const onClickDelete = useCallback((postId) => {
     dispatch({
@@ -39,6 +52,7 @@ const MemoryLayout = () => {
       data: postId,
     });
   }, []);
+
   return (
     <StyledBackground>
       <FrameStyled>
@@ -79,10 +93,18 @@ const MemoryLayout = () => {
               ]}
             >
               <Link to={`/memory/${post.id}`} text="test">
-                <Meta title={post.title} description={post.content} />
+                <Meta
+                  title={post.title}
+                  description={
+                    post.content.length > 70
+                      ? post.content.substring(0, 70).concat("...")
+                      : post.content
+                  }
+                />
               </Link>
             </Card>
           ))}
+          <div ref={hasMorePost && !loadPostLoading ? ref : undefined} />
         </CardContainer>
       </FrameStyled>
     </StyledBackground>
