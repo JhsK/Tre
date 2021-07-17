@@ -1,13 +1,13 @@
 import React from "react";
 import MenuComponents from "../components/MenuComponents";
-import FullCalendarTest from "../components/FullCalendarTest";
+import FullCalendar from "../components/FullCalendar";
 import { ScheduleContainer } from "./schedule";
 
 const calendar = () => {
   return (
     <ScheduleContainer>
       <MenuComponents />
-      <FullCalendarTest />
+      <FullCalendar />
     </ScheduleContainer>
   );
 };

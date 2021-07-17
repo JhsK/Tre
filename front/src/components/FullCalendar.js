@@ -41,6 +41,7 @@ const FullCalendarTest = () => {
         end,
         title,
         dateValue,
+        planDoneCheck: false,
       })
     );
     setTitle("");

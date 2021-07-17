@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Radio } from "antd";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
+import styled, { createGlobalStyle } from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { DONE_PLAN_REQUEST, REMOVE_PLAN_REQUEST } from "../reducers/plan";
 
 export const ListContainer = styled.div`
   padding: 3rem 4rem;
@@ -26,7 +27,7 @@ export const PlanTextContainer = styled.div`
   flex-direction: column;
 `;
 
-export const PlanText = styled.div`
+export const PlanDate = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -38,52 +39,86 @@ export const RadioPlanDday = styled.span`
 export const RadioPlanDate = styled.span`
   padding-left: 1.5rem;
   font-size: 0.8rem;
+  margin-right: 1rem;
+`;
+
+export const Global = createGlobalStyle`
+  .ant-radio-wrapper {
+    font-size: 1.2rem;
+  }
 `;
 
 const FuturePlanComponent = () => {
+  const dispatch = useDispatch();
   const planData = useSelector((state) => state.plan.planData);
-  let start = planData.start;
-  let end = planData.end;
-  // let now = new Date();
-  // let distance = end.getTime() - now.getTime();
-  // let dDay = Math.floor(distance / (1000 * 60 * 60 * 24)) + 1;
+
+  const onClickRadio = useCallback((id) => {
+    dispatch({
+      type: DONE_PLAN_REQUEST,
+      id,
+    });
+  }, []);
+
+  const onDeltePlan = useCallback((id) => {
+    console.log("test!!");
+    dispatch({
+      type: REMOVE_PLAN_REQUEST,
+      id,
+    });
+  }, []);
 
   return (
     <>
       <ListContainer>
-        <RadioContainer>
-          {end && (
-            <PlanTextContainer>
-              <PlanText>
-                <Radio style={{ fontSize: "1.2rem" }}>{planData.title}</Radio>
-                <RadioPlanDday>D-2</RadioPlanDday>
-              </PlanText>
-              <RadioPlanDate>
-                {String(start.getFullYear()) +
-                  "." +
-                  String(start.getMonth() + 1) +
-                  "." +
-                  String(start.getDate()) +
-                  " "}
-                ~
-                {String(end.getFullYear()) +
-                  "." +
-                  String(end.getMonth() + 1) +
-                  "." +
-                  String(end.getDate()) +
-                  " "}
-              </RadioPlanDate>
-            </PlanTextContainer>
-          )}
-          <DeleteBtn>삭제</DeleteBtn>
-        </RadioContainer>
+        {planData &&
+          planData.map((item) => {
+            if (item.planDoneCheck) {
+              return null;
+            }
+            let start = item.start;
+            let end = item.end;
+            const nowDay = new Date();
+            const dday = Math.ceil((end - nowDay) / (1000 * 60 * 60 * 24));
+            start =
+              start.getFullYear().toString() +
+              ". " +
+              (start.getMonth() + 1).toString() +
+              ". " +
+              start.getDate().toString();
+            end =
+              end.getFullYear().toString() +
+              ". " +
+              (end.getMonth() + 1).toString() +
+              ". " +
+              end.getDate().toString();
+
+            return (
+              <RadioContainer>
+                <Global />
+                <PlanTextContainer key={item.id}>
+                  <Radio key={item.id} onClick={() => onClickRadio(item.id)}>
+                    {item.title}
+                  </Radio>
+                  <PlanDate key={item.id}>
+                    <RadioPlanDate key={item.id}>
+                      {start} ~ {end}
+                    </RadioPlanDate>
+                    <RadioPlanDday>D-{dday}</RadioPlanDday>
+                  </PlanDate>
+                </PlanTextContainer>
+                <DeleteBtn key={item.id} onClick={() => onDeltePlan(item.id)}>
+                  삭제
+                </DeleteBtn>
+              </RadioContainer>
+            );
+          })}
         <RadioContainer>
           <PlanTextContainer>
-            <PlanText>
-              <Radio style={{ fontSize: "1.2rem" }}>DB 설계하기</Radio>
+            <Radio style={{ fontSize: "1.2rem" }}>DB 설계하기</Radio>
+            <PlanDate>
+              <RadioPlanDate>2021.06.21 ~ 2021.06.30</RadioPlanDate>
               <RadioPlanDday>D-2</RadioPlanDday>
-            </PlanText>
-            <RadioPlanDate>2021.06.21 ~ 2021.06.30</RadioPlanDate>
+            </PlanDate>
           </PlanTextContainer>
           <DeleteBtn>삭제</DeleteBtn>
         </RadioContainer>
