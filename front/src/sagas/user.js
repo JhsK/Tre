@@ -10,6 +10,9 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
+  NICK_CHANGE_REQUEST,
+  NICK_CHANGE_SUCCESS,
+  NICK_CHANGE_FAILURE,
 } from "../reducers/user";
 
 function logInAPI(data) {
@@ -21,6 +24,10 @@ function logOutAPI() {
 }
 
 function signUpAPI() {
+  return axios.post("/api/signUp");
+}
+
+function nickChangeAPI() {
   return axios.post("/api/signUp");
 }
 
@@ -73,6 +80,22 @@ function* signUp() {
   }
 }
 
+function* nickChagne(action) {
+  try {
+    yield delay(1000);
+    //const result = yield call(nickChangeAPI, action.data);
+    yield put({
+      type: NICK_CHANGE_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: NICK_CHANGE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -85,6 +108,15 @@ function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
+function* watchNickChange() {
+  yield takeLatest(NICK_CHANGE_REQUEST, nickChagne);
+}
+
 export default function* userSaga() {
-  yield all([fork(watchLogIn), fork(watchLogOut), fork(watchSignUp)]);
+  yield all([
+    fork(watchLogIn),
+    fork(watchLogOut),
+    fork(watchSignUp),
+    fork(watchNickChange),
+  ]);
 }

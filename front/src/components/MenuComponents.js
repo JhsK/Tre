@@ -53,6 +53,7 @@ const MenuComponents = () => {
 
   const onClickedLogout = useCallback(() => {
     dispatch(logoutRequestAction());
+    history.push("/");
   }, []);
   return (
     <>

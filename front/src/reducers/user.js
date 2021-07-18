@@ -10,6 +10,12 @@ export const initialState = {
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
+  nickChangeLoading: false,
+  nickChangeDone: false,
+  nickChangeError: null,
+  emailChangeLoading: false,
+  emailChangeDone: false,
+  emailChangeError: null,
   user: null,
   Posts: [{ id: 1 }],
   signUpData: {},
@@ -28,6 +34,14 @@ export const SIGN_UP_REQUEST = "SING_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SING_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SING_UP_FAILURE";
 
+export const NICK_CHANGE_REQUEST = "NICK_CHANGE_REQUEST";
+export const NICK_CHANGE_SUCCESS = "NICK_CHANGE_SUCCESS";
+export const NICK_CHANGE_FAILURE = "NICK_CHANGE_FAILURE";
+
+export const EMAIL_CHANGE_REQUEST = "EMAIL_CHANGE_REQUEST";
+export const EMAIL_CHANGE_SUCCESS = "EMAIL_CHANGE_SUCCESS";
+export const EMAIL_CHANGE_FAILURE = "EMAIL_CHANGE_FAILURE";
+
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
@@ -44,6 +58,14 @@ export const logoutRequestAction = (data) => {
   };
 };
 
+const dummyUser = (data) => ({
+  ...data,
+  nickname: "JhsK",
+  email: "qwe6293@nate.com",
+  id: 1,
+  Posts: [{ id: 1 }],
+});
+
 const user = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
@@ -55,7 +77,7 @@ const user = (state = initialState, action) => {
       case LOG_IN_SUCCESS:
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.user = action.data;
+        draft.user = dummyUser(action.data);
         break;
       case LOG_IN_FAILURE:
         draft.logInLoading = false;
@@ -88,6 +110,20 @@ const user = (state = initialState, action) => {
       case SIGN_UP_FAILURE:
         draft.signUpLoading = false;
         draft.signUpError = action.data;
+        break;
+      case NICK_CHANGE_REQUEST:
+        draft.nickChangeLoading = true;
+        draft.nickChangeDone = false;
+        draft.nickChangeError = null;
+        break;
+      case NICK_CHANGE_SUCCESS:
+        draft.user.nickname = action.data;
+        draft.nickChangeLoading = false;
+        draft.nickChangeDone = true;
+        break;
+      case NICK_CHANGE_FAILURE:
+        draft.nickChangeLoading = false;
+        draft.nickChangeError = action.data;
         break;
       case ADD_POST_TO_ME:
         draft.Posts.unshift({ id: action.data });
