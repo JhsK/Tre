@@ -13,6 +13,9 @@ import {
   NICK_CHANGE_REQUEST,
   NICK_CHANGE_SUCCESS,
   NICK_CHANGE_FAILURE,
+  EMAIL_CHANGE_REQUEST,
+  EMAIL_CHANGE_SUCCESS,
+  EMAIL_CHANGE_FAILURE,
 } from "../reducers/user";
 
 function logInAPI(data) {
@@ -28,6 +31,10 @@ function signUpAPI() {
 }
 
 function nickChangeAPI() {
+  return axios.post("/api/signUp");
+}
+
+function emailChangeAPI() {
   return axios.post("/api/signUp");
 }
 
@@ -96,6 +103,22 @@ function* nickChagne(action) {
   }
 }
 
+function* emailChange(action) {
+  try {
+    yield delay(1000);
+    //const result = yield call(emailChangeAPI, action.data);
+    yield put({
+      type: EMAIL_CHANGE_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: EMAIL_CHANGE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -112,11 +135,16 @@ function* watchNickChange() {
   yield takeLatest(NICK_CHANGE_REQUEST, nickChagne);
 }
 
+function* watchEmailChange() {
+  yield takeLatest(EMAIL_CHANGE_REQUEST, emailChange);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchSignUp),
     fork(watchNickChange),
+    fork(watchEmailChange),
   ]);
 }

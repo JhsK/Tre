@@ -5,7 +5,7 @@ import { Avatar, Modal, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
-import { NICK_CHANGE_REQUEST } from "../reducers/user";
+import { EMAIL_CHANGE_REQUEST, NICK_CHANGE_REQUEST } from "../reducers/user";
 
 const InfoContainer = styled.div`
   display: flex;
@@ -59,8 +59,12 @@ const InfoLayout = () => {
   }, []);
 
   const emailOk = useCallback(() => {
+    dispatch({
+      type: EMAIL_CHANGE_REQUEST,
+      data: emailInput,
+    });
     setEmailModal(false);
-  }, []);
+  }, [emailInput]);
 
   const emailCancel = useCallback(() => {
     setEmailModal(false);

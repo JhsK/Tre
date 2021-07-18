@@ -125,6 +125,20 @@ const user = (state = initialState, action) => {
         draft.nickChangeLoading = false;
         draft.nickChangeError = action.data;
         break;
+      case EMAIL_CHANGE_REQUEST:
+        draft.emailChangeLoading = true;
+        draft.emailChangeDone = false;
+        draft.emailChangeError = null;
+        break;
+      case EMAIL_CHANGE_SUCCESS:
+        draft.user.email = action.data;
+        draft.emailChangeLoading = false;
+        draft.emailChangeDone = true;
+        break;
+      case EMAIL_CHANGE_FAILURE:
+        draft.emailChangeLoading = false;
+        draft.emailChangeError = action.data;
+        break;
       case ADD_POST_TO_ME:
         draft.Posts.unshift({ id: action.data });
         break;
