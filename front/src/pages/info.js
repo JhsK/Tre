@@ -1,15 +1,15 @@
 import React from "react";
-import MemoryLayout from "../components/MemoryLayout";
 import MenuComponents from "../components/MenuComponents";
+import InfoLayout from "../components/InfoLayout";
 import { ScheduleContainer } from "./schedule";
 
-const memory = () => {
+const info = () => {
   return (
     <ScheduleContainer>
       <MenuComponents />
-      <MemoryLayout />
+      <InfoLayout />
     </ScheduleContainer>
   );
 };
 
-export default memory;
+export default info;

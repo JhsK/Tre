@@ -7,7 +7,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
@@ -112,7 +112,9 @@ const MenuComponents = () => {
             height: "80px",
           }}
         >
-          <Menu.Item key="4">내 정보</Menu.Item>
+          <Menu.Item key="4">
+            <Link to="/info">내 정보</Link>
+          </Menu.Item>
           <Menu.Item key="5" onClick={() => onClickedLogout()}>
             로그아웃
           </Menu.Item>

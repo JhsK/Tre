@@ -9,6 +9,7 @@ import Memory from "./pages/memory";
 import Write from "./pages/write";
 import Detail from "./pages/detail";
 import PlanUpdate from "./pages/planUpdate";
+import Info from "./pages/info";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -28,6 +29,7 @@ const App = () => {
       <Route path="/memory" component={Memory} exact />
       <Route path="/memory/write" component={Write} exact />
       <Route path="/memory/:id" component={Detail} exact />
+      <Route path="/info" component={Info} exact />
     </>
   );
 };
