@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import LoginForm from "./style/LoginForm.css";
 import useInput from "../hooks/useInput";
@@ -22,12 +22,17 @@ const KakaoBtn = styled.button`
 
 const LoginComponents = () => {
   const dispatch = useDispatch();
-  const { logInLoading } = useSelector((state) => state.user);
+  const { logInLoading, logInError } = useSelector((state) => state.user);
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
 
+  useEffect(() => {
+    if (logInError) {
+      alert(logInError);
+    }
+  }, [logInError]);
+
   const onSubmitLogin = useCallback(() => {
-    // console.log(username, password);
     dispatch(
       loginRequestAction({
         username,

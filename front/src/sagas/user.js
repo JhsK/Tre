@@ -43,8 +43,7 @@ function* logIn(action) {
     const result = yield call(logInAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
-      //data: result.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -56,8 +55,7 @@ function* logIn(action) {
 
 function* logOut() {
   try {
-    yield delay(1000);
-    //const result = yield call(logOutAPI);
+    yield call(logOutAPI);
     yield put({
       type: LOG_OUT_SUCCESS,
       //data: result.data,

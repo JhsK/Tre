@@ -52,6 +52,7 @@ const MenuComponents = () => {
   }, []);
 
   const onClickedLogout = useCallback(() => {
+    console.log("test");
     dispatch(logoutRequestAction());
     history.push("/");
   }, []);
@@ -62,7 +63,7 @@ const MenuComponents = () => {
         defaultSelectedKeys={["1"]}
         mode="inline"
         theme="light"
-        onClick={onClickMenu}
+        //onClick={onClickMenu}
       >
         <LogoImg
           src={
