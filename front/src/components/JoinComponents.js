@@ -1,17 +1,38 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import useInput from "../hooks/useInput";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGN_UP_REQUEST } from "../reducers/user";
 
 const JoinComponents = () => {
+  const dispatch = useDispatch();
+  const { signUpDone, signUpError } = useSelector((state) => state.user);
+  const history = useHistory();
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
   const [nickname, onChangeNickname] = useInput("");
   const [email, onChangeEmail] = useInput("");
 
+  useEffect(() => {
+    if (signUpDone) {
+      history.push("/");
+    }
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
+
   const onSubmitJoin = useCallback(() => {
-    console.log(username, password, nickname, email);
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      data: { username, password, nickname, email },
+    });
+    //console.log(username, password, nickname, email);
   }, [username, password, nickname, email]);
 
   return (
