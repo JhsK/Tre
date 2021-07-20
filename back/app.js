@@ -23,6 +23,7 @@ passportConfig();
 app.use(
   cors({
     origin: true,
+    credentials: true,
   })
 );
 app.use(express.json());
@@ -37,10 +38,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get("/", (req, res) => {
-  res.send("hellow express");
-});
 
 app.get("/", (req, res) => {
   res.send("hello api");
