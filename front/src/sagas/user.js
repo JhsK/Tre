@@ -16,6 +16,9 @@ import {
   EMAIL_CHANGE_REQUEST,
   EMAIL_CHANGE_SUCCESS,
   EMAIL_CHANGE_FAILURE,
+  LOAD_MY_INFO_REQUEST,
+  LOAD_MY_INFO_SUCCESS,
+  LOAD_MY_INFO_FAILURE,
 } from "../reducers/user";
 
 function logInAPI(data) {
@@ -36,6 +39,10 @@ function nickChangeAPI() {
 
 function emailChangeAPI() {
   return axios.post("/api/signUp");
+}
+
+function loadMyInfoAPI() {
+  return axios.get("user");
 }
 
 function* logIn(action) {
@@ -115,6 +122,21 @@ function* emailChange(action) {
   }
 }
 
+function* loadMyInfo(action) {
+  try {
+    const result = yield call(loadMyInfoAPI, action.data);
+    yield put({
+      type: LOAD_MY_INFO_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_MY_INFO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -135,6 +157,10 @@ function* watchEmailChange() {
   yield takeLatest(EMAIL_CHANGE_REQUEST, emailChange);
 }
 
+function* watchLoadMyInfo() {
+  yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
@@ -142,5 +168,6 @@ export default function* userSaga() {
     fork(watchSignUp),
     fork(watchNickChange),
     fork(watchEmailChange),
+    fork(watchLoadMyInfo),
   ]);
 }

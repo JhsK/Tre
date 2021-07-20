@@ -1,4 +1,4 @@
-import { all, fork, delay, put, takeLatest } from "redux-saga/effects";
+import { all, fork, delay, put, takeLatest, call } from "redux-saga/effects";
 import axios from "axios";
 import {
   ADD_POST_REQUEST,
@@ -16,7 +16,7 @@ import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../reducers/user";
 import shortid from "shortid";
 
 function addPostAPI(data) {
-  return axios.post("/api/post", data);
+  return axios.post("/post", data);
 }
 
 function removeAPI(data) {
@@ -29,19 +29,15 @@ function loadPostAPI(data) {
 
 function* addPost(action) {
   try {
-    //const result = yield call(addPostAPI, action.data);
-    yield delay(1000);
-    const id = shortid.generate();
+    console.log(action.data);
+    const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_POST_SUCCESS,
-      data: {
-        id,
-        dummy: action.data,
-      },
+      data: result.data,
     });
     yield put({
       type: ADD_POST_TO_ME,
-      data: id,
+      data: result.data.id,
     });
   } catch (err) {
     yield put({

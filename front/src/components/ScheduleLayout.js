@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
+import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import FuturePlanComponent from "./FuturePlanComponent";
 import PastPlanComponent from "./PastPlanComponent";
 
@@ -68,6 +69,7 @@ const TabText = styled.span`
 
 const ScheduleLayout = () => {
   const [activeState, setActiveState] = useState(0);
+
   const onTabClicked = useCallback((key) => {
     setActiveState(key);
   }, []);

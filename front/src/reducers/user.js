@@ -16,6 +16,9 @@ export const initialState = {
   emailChangeLoading: false,
   emailChangeDone: false,
   emailChangeError: null,
+  loadMyInfoLoading: false,
+  loadMyInfoDone: false,
+  loadMyInfoError: null,
   user: null,
   Posts: [{ id: 1 }],
   signUpData: {},
@@ -41,6 +44,10 @@ export const NICK_CHANGE_FAILURE = "NICK_CHANGE_FAILURE";
 export const EMAIL_CHANGE_REQUEST = "EMAIL_CHANGE_REQUEST";
 export const EMAIL_CHANGE_SUCCESS = "EMAIL_CHANGE_SUCCESS";
 export const EMAIL_CHANGE_FAILURE = "EMAIL_CHANGE_FAILURE";
+
+export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
+export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
+export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
 
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
@@ -138,6 +145,20 @@ const user = (state = initialState, action) => {
       case EMAIL_CHANGE_FAILURE:
         draft.emailChangeLoading = false;
         draft.emailChangeError = action.data;
+        break;
+      case LOAD_MY_INFO_REQUEST:
+        draft.loadMyInfoLoading = true;
+        draft.loadMyInfoError = null;
+        draft.loadMyInfoDone = false;
+        break;
+      case LOAD_MY_INFO_SUCCESS:
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoDone = true;
+        draft.user = action.data;
+        break;
+      case LOAD_MY_INFO_FAILURE:
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoError = action.data;
         break;
       case ADD_POST_TO_ME:
         draft.Posts.unshift({ id: action.data });

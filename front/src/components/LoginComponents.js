@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import LoginForm from "./style/LoginForm.css";
 import useInput from "../hooks/useInput";
-import { loginRequestAction } from "../reducers/user";
+import { LOAD_MY_INFO_REQUEST, loginRequestAction } from "../reducers/user";
 
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -23,11 +23,23 @@ const KakaoBtn = styled.button`
 const LoginComponents = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { logInLoading, logInError, logInDone } = useSelector(
+  const { logInLoading, logInError, logInDone, user } = useSelector(
     (state) => state.user
   );
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
+
+  useEffect(() => {
+    if (user) {
+      history.replace("/");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     if (logInError) {

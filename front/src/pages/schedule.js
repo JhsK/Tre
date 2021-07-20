@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MenuComponents from "../components/MenuComponents";
 import ScheduleLayout from "../components/ScheduleLayout";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export const ScheduleContainer = styled.div`
   display: flex;
@@ -9,7 +11,16 @@ export const ScheduleContainer = styled.div`
   height: 100%;
 `;
 
-const schedule = () => {
+const Schedule = () => {
+  const { user } = useSelector((state) => state.user);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!user) {
+      history.replace("/login");
+    }
+  }, [user]);
+
   return (
     <ScheduleContainer>
       <MenuComponents />
@@ -18,4 +29,4 @@ const schedule = () => {
   );
 };
 
-export default schedule;
+export default Schedule;

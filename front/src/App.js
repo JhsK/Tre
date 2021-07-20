@@ -15,13 +15,16 @@ import React from "react";
 
 const App = () => {
   const { logInDone, logOutDone } = useSelector((state) => state.user);
+
   return (
     <>
-      {logInDone && !logOutDone ? (
+      {/* {logInDone && !logOutDone ? (
         <Route path="/" component={Schedule} exact={true} />
       ) : (
         <Route path="/" component={Login} exact={true} />
-      )}
+      )} */}
+      <Route path="/" component={Schedule} exact={true} />
+      <Route path="/login" component={Login} exact={true} />
       <Route path="/join" component={Join} exact={true} />
       <Route path="/password" component={PasswordFind} exact={true} />
       <Route path="/calendar" component={Calendar} exact />
