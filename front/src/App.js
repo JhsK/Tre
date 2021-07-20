@@ -10,14 +10,14 @@ import Write from "./pages/write";
 import Detail from "./pages/detail";
 import PlanUpdate from "./pages/planUpdate";
 import Info from "./pages/info";
-import React from "react";
 import { useSelector } from "react-redux";
+import React from "react";
 
 const App = () => {
-  const { logInDone } = useSelector((state) => state.user);
+  const { logInDone, logOutDone } = useSelector((state) => state.user);
   return (
     <>
-      {logInDone ? (
+      {logInDone && !logOutDone ? (
         <Route path="/" component={Schedule} exact={true} />
       ) : (
         <Route path="/" component={Login} exact={true} />
@@ -28,7 +28,7 @@ const App = () => {
       <Route path="/calendar/:id" component={PlanUpdate} exact />
       <Route path="/memory" component={Memory} exact />
       <Route path="/memory/write" component={Write} exact />
-      <Route path="/memory/:id" component={Detail} exact />
+      {/* <Route path="/memory/:id" component={Detail} exact /> */}
       <Route path="/info" component={Info} exact />
     </>
   );

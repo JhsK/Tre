@@ -52,7 +52,6 @@ const MenuComponents = () => {
   }, []);
 
   const onClickedLogout = useCallback(() => {
-    console.log("test");
     dispatch(logoutRequestAction());
     history.push("/");
   }, []);
@@ -73,7 +72,6 @@ const MenuComponents = () => {
           }
           alt="logo"
         />
-        {/* ../image/logo.png */}
         <Menu.Item
           key="1"
           icon={<ScheduleOutlined style={{ fontSize: "1rem" }} />}
@@ -117,7 +115,7 @@ const MenuComponents = () => {
           <Menu.Item key="4">
             <Link to="/info">내 정보</Link>
           </Menu.Item>
-          <Menu.Item key="5" onClick={() => onClickedLogout()}>
+          <Menu.Item key="5" onClick={onClickedLogout}>
             로그아웃
           </Menu.Item>
         </SubMenu>

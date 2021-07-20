@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import FuturePlanComponent from "./FuturePlanComponent";
 import PastPlanComponent from "./PastPlanComponent";

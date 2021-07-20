@@ -52,9 +52,9 @@ export const loginRequestAction = (data) => {
   };
 };
 
-export const logoutRequestAction = (data) => {
+export const logoutRequestAction = () => {
   return {
-    type: "LOG_OUT_REQUEST",
+    type: LOG_OUT_REQUEST,
   };
 };
 

@@ -19,7 +19,7 @@ import {
 } from "../reducers/user";
 
 function logInAPI(data) {
-  return axios.post("http://localhost:3065/user/login", data);
+  return axios.post("/user/login", data);
 }
 
 function logOutAPI() {
@@ -27,7 +27,7 @@ function logOutAPI() {
 }
 
 function signUpAPI(data) {
-  return axios.post("http://localhost:3065/user", data);
+  return axios.post("/user", data);
 }
 
 function nickChangeAPI() {
@@ -58,9 +58,9 @@ function* logOut() {
     yield call(logOutAPI);
     yield put({
       type: LOG_OUT_SUCCESS,
-      //data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOG_OUT_FAILURE,
       error: err.response.data,

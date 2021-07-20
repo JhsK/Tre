@@ -6,7 +6,7 @@ import { loginRequestAction } from "../reducers/user";
 
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const KakaoBtn = styled.button`
@@ -22,7 +22,10 @@ const KakaoBtn = styled.button`
 
 const LoginComponents = () => {
   const dispatch = useDispatch();
-  const { logInLoading, logInError } = useSelector((state) => state.user);
+  const history = useHistory();
+  const { logInLoading, logInError, logInDone } = useSelector(
+    (state) => state.user
+  );
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
 
