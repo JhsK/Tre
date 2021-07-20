@@ -4,8 +4,10 @@ const passport = require("passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
+const morgan = require("morgan");
 
 const postRouter = require("./routes/post");
+const postsRouter = require("./routes/posts");
 const userRouter = require("./routes/user");
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -20,6 +22,7 @@ db.sequelize
   .catch(console.error);
 passportConfig();
 
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: true,
@@ -43,17 +46,9 @@ app.get("/", (req, res) => {
   res.send("hello api");
 });
 
-app.get("/posts", (req, res) => {
-  res.json([
-    {
-      id: 1,
-      content: "hello",
-    },
-  ]);
-});
-
-app.use("/post", postRouter);
 app.use("/user", userRouter);
+app.use("/post", postRouter);
+app.use("/posts", postsRouter);
 
 app.listen(3065, () => {
   console.log("서버 실행 중");
