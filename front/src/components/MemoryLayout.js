@@ -14,7 +14,7 @@ const { Meta } = Card;
 
 const CardContainer = styled.div`
   width: 100%;
-  height: calc(100% - 85px);
+  //height: calc(100% - 85px);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -36,15 +36,21 @@ const MemoryLayout = () => {
     (state) => state.post
   );
 
+  // useEffect(() => {
+  //   if (inView && hasMorePost && !loadPostLoading) {
+  //     const lastId = mainPosts[mainPosts.length - 1]?.id;
+  //     dispatch({
+  //       type: LOAD_POST_REQUEST,
+  //       lastId,
+  //     });
+  //   }
+  // }, [inView, hasMorePost, loadPostLoading, mainPosts]);
+
   useEffect(() => {
-    if (inView && hasMorePost && !loadPostLoading) {
-      const lastId = mainPosts[mainPosts.length - 1]?.id;
-      dispatch({
-        type: LOAD_POST_REQUEST,
-        lastId,
-      });
-    }
-  }, [inView, hasMorePost, loadPostLoading, mainPosts]);
+    dispatch({
+      type: LOAD_POST_REQUEST,
+    });
+  }, []);
 
   const onClickDelete = useCallback((postId) => {
     dispatch({

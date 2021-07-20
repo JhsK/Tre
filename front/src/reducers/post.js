@@ -1,6 +1,4 @@
 import produce from "immer";
-import shortid from "shortid";
-import faker from "faker";
 
 export const initialState = {
   mainPosts: [],
@@ -16,24 +14,6 @@ export const initialState = {
   removePostDone: false,
   removePostError: null,
 };
-
-export const generateDummyPost = (number) =>
-  Array(number)
-    .fill()
-    .map(() => ({
-      id: shortid.generate(),
-      User: {
-        id: shortid.generate(),
-        nickname: faker.name.findName(),
-      },
-      title: faker.name.title(),
-      content: faker.lorem.paragraph(),
-      Images: [
-        {
-          src: faker.image.image(),
-        },
-      ],
-    }));
 
 export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
 export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
