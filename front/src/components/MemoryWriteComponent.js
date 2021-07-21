@@ -1,12 +1,15 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { PageHeader, Button, Form, Input, Rate, Upload, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PageHeader, Button, Form, Input, Rate } from "antd";
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import useInput from "../hooks/useInput";
-import { useDispatch } from "react-redux";
-import { addPost } from "../reducers/post";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  UPLOAD_IMAGES_REQUEST,
+  ADD_POST_REQUEST,
+  REMOVE_IMAGE,
+} from "../reducers/post";
 import { useHistory } from "react-router";
 
 const { TextArea } = Input;
@@ -26,54 +29,81 @@ const FormContainer = styled.div`
   }
 `;
 
-const UploadContainer = styled.div`
-  width: 75%;
+const PreviewContainer = styled.div`
+  text-align: left;
 `;
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
+const PreviewImage = styled.div`
+  display: inline-block;
+
+  & img {
+    width: 100px;
+  }
+
+  & Button {
+    margin-top: 1rem;
+  }
+`;
 
 const MemoryWriteComponent = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [modalState, setModalState] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
+  const { imagePaths } = useSelector((state) => state.post);
   const [rateValue, SetRateValue] = useState(0);
   const [writeTitle, onChangeWriteTitle] = useInput("");
   const [writeContent, onChangeWriteContent] = useInput("");
+  const imageInput = useRef();
+
+  const onChangeImages = useCallback((e) => {
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, (f) => {
+      imageFormData.append("image", f);
+    });
+    dispatch({
+      type: UPLOAD_IMAGES_REQUEST,
+      data: imageFormData,
+    });
+  }, []);
+
+  const onRemoveImage = useCallback(
+    (index) => () => {
+      dispatch({
+        type: REMOVE_IMAGE,
+        data: index,
+      });
+    },
+    []
+  );
+
+  const onClickImageUpload = useCallback(() => {
+    imageInput.current.click();
+  }, [imageInput.current]);
 
   const onSubmitWrite = useCallback(() => {
-    dispatch(
-      addPost({
-        title: writeTitle,
-        content: writeContent,
-        rate: rateValue,
-      })
-    );
+    if (
+      (!writeTitle || !writeTitle.trim()) &&
+      (!writeContent || !writeContent.trim())
+    ) {
+      return alert("제목 또는 게시물을 작성하세요");
+    }
+    const formData = new FormData();
+    imagePaths.forEach((i) => {
+      formData.append("image", i);
+    });
+    formData.append("title", writeTitle);
+    formData.append("content", writeContent);
+    formData.append("rate", rateValue);
+
+    dispatch({
+      type: ADD_POST_REQUEST,
+      data: formData,
+    });
+
     history.push("/memory");
-  }, [writeTitle, writeContent, rateValue]);
+  }, [writeTitle, writeContent, rateValue, imagePaths]);
 
   const onChangeRate = useCallback((value) => {
     SetRateValue(value);
-  }, []);
-
-  const handlePreview = useCallback(async (file) => {
-    console.log(file);
-    // if (!file.url && !file.preview) {
-    //   file.preview = await getBase64(file.originFilobj);
-    // }
-    setModalState((prev) => !prev);
-    setPreviewImage(file.url || file.preview);
-  }, []);
-
-  const modalCancel = useCallback(() => {
-    setModalState((prev) => !prev);
   }, []);
 
   return (
@@ -92,6 +122,7 @@ const MemoryWriteComponent = () => {
             name="postWrite"
             style={{ width: "75%" }}
             onFinish={onSubmitWrite}
+            encType="multipart/form-data"
           >
             <Form.Item name="title">
               <Input
@@ -119,34 +150,31 @@ const MemoryWriteComponent = () => {
                 name="score"
               />
             </Form.Item>
+            <Form.Item>
+              <input
+                type="file"
+                hidden
+                name="image"
+                ref={imageInput}
+                multiple
+                onChange={onChangeImages}
+              />
+              <Button onClick={onClickImageUpload}>이미지 업로드</Button>
+            </Form.Item>
             <Form.Item className="write-submit-btn">
               <Button htmlType="submit">작성하기</Button>
             </Form.Item>
+            <PreviewContainer>
+              {imagePaths.map((v, i) => (
+                <PreviewImage key={v}>
+                  <img src={`http://localhost:3065/${v}`} alt={v} />
+                  <div>
+                    <Button onClick={onRemoveImage(i)}>제거</Button>
+                  </div>
+                </PreviewImage>
+              ))}
+            </PreviewContainer>
           </Form>
-          <UploadContainer>
-            <Upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture-card"
-              //fileList={fileList}
-              onPreview={handlePreview}
-              // onChange={this.handleChange}
-            >
-              {false ? null : (
-                <div>
-                  <PlusOutlined />
-                  <div style={{ marginTop: 8 }}>Upload</div>
-                </div>
-              )}
-            </Upload>
-            <Modal
-              visible={modalState}
-              title="미리보기"
-              footer={null}
-              onCancel={modalCancel}
-            >
-              <img alt="example" style={{ width: "100%" }} src={previewImage} />
-            </Modal>
-          </UploadContainer>
         </FormContainer>
       </FrameStyled>
     </StyledBackground>
