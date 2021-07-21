@@ -19,6 +19,7 @@ router.get("/", async (req, res, next) => {
         },
       ],
     });
+    console.log("!!!!!!!", req.user);
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
