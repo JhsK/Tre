@@ -32,9 +32,8 @@ const CardContainer = styled.div`
 const MemoryLayout = () => {
   const dispatch = useDispatch();
   const [ref, inView] = useInView();
-  const { mainPosts, hasMorePost, loadPostLoading } = useSelector(
-    (state) => state.post
-  );
+  const { mainPosts, hasMorePost, loadPostLoading, removePostDone } =
+    useSelector((state) => state.post);
 
   // useEffect(() => {
   //   if (inView && hasMorePost && !loadPostLoading) {

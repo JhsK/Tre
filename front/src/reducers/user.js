@@ -65,14 +65,6 @@ export const logoutRequestAction = () => {
   };
 };
 
-const dummyUser = (data) => ({
-  ...data,
-  nickname: "JhsK",
-  email: "qwe6293@nate.com",
-  id: 1,
-  Posts: [{ id: 1 }],
-});
-
 const user = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
@@ -124,7 +116,7 @@ const user = (state = initialState, action) => {
         draft.nickChangeError = null;
         break;
       case NICK_CHANGE_SUCCESS:
-        draft.user.nickname = action.data;
+        draft.user.nickname = action.data.nickname;
         draft.nickChangeLoading = false;
         draft.nickChangeDone = true;
         break;
