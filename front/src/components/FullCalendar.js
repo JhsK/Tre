@@ -36,7 +36,6 @@ const FullCalendarTest = () => {
     setModalVisible(false);
     dispatch(
       addPlan({
-        id: 3,
         start,
         end,
         title,

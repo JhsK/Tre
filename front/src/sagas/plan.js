@@ -16,7 +16,7 @@ import {
 } from "../reducers/plan";
 
 function addPlanAPI(data) {
-  return axios.post("/api/plan", data);
+  return axios.post("/plan", data);
 }
 
 function updatePlanAPI(data) {
@@ -33,10 +33,10 @@ function donePlanAPI(data) {
 
 function* addPlan(action) {
   try {
-    //const reuslt = yield call(addPlanAPI, action.data);
+    const result = yield call(addPlanAPI, action.data);
     yield put({
       type: ADD_PLAN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
