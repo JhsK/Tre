@@ -94,12 +94,12 @@ const MemoryWriteComponent = () => {
     formData.append("content", writeContent);
     formData.append("rate", rateValue);
 
+    history.push("/memory");
+
     dispatch({
       type: ADD_POST_REQUEST,
       data: formData,
     });
-
-    history.push("/memory");
   }, [writeTitle, writeContent, rateValue, imagePaths]);
 
   const onChangeRate = useCallback((value) => {
@@ -114,7 +114,11 @@ const MemoryWriteComponent = () => {
           title="작성하기"
           onBack={() => window.history.back()}
           subTitle="직접 가본 장소"
-          extra={[<Button key="1">취소</Button>]}
+          extra={[
+            <Button key="1" onClick={() => history.push("/memory")}>
+              취소
+            </Button>,
+          ]}
           style={{ borderBottom: "1px solid #f3f3f3" }}
         />
         <FormContainer>

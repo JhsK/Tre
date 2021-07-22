@@ -16,8 +16,6 @@ const PlanListStyled = styled.div`
 const PlanListComponent = ({ dateValue }) => {
   const history = useHistory();
   const { planData } = useSelector((state) => state.plan);
-  console.log(planData);
-  console.log(dateValue);
   const [planList, setPlanList] = useState("");
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const PlanListComponent = ({ dateValue }) => {
     setPlanList(planData.filter((a, i) => a.dateValue === dateValue));
   }, [dateValue, planData]);
 
-  console.log(planList);
+  //console.log(planList);
 
   const onClickUpdate = useCallback(
     (key) => {

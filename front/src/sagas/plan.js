@@ -1,5 +1,6 @@
 import { all, fork, put, takeLatest, call } from "redux-saga/effects";
 import axios from "axios";
+import moment from "moment";
 import {
   ADD_PLAN_REQUEST,
   ADD_PLAN_SUCCESS,
@@ -20,7 +21,7 @@ function addPlanAPI(data) {
 }
 
 function updatePlanAPI(data) {
-  return axios.post("/api/plan", data);
+  return axios.patch(`/plan/${data.id}`, data);
 }
 
 function removePlanAPI(data) {
@@ -48,10 +49,10 @@ function* addPlan(action) {
 
 function* updatePlan(action) {
   try {
-    //const reuslt = yield call(updatePlanAPI, action.data);
+    const reuslt = yield call(updatePlanAPI, action.data);
     yield put({
       type: UPDATE_PLAN_SUCCESS,
-      data: action.data,
+      data: reuslt.data,
     });
   } catch (err) {
     yield put({

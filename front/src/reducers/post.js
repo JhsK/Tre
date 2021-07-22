@@ -50,10 +50,13 @@ const post = (state = initialState, action) => {
         draft.loadPostError = null;
         break;
       case LOAD_POST_SUCCESS:
+        console.log(action.data);
         draft.loadPostLoading = false;
         draft.loadPostDone = true;
-        draft.mainPosts = draft.mainPosts.concat(action.data);
-        draft.hasMorePost = draft.mainPosts.length < 50;
+        draft.mainPosts = draft.mainPosts
+          .filter((v) => v.id !== action.data.id)
+          .concat(action.data);
+        draft.hasMorePost = action.data.length === 10;
         break;
       case LOAD_POST_FAILURE:
         draft.addPostLoading = false;

@@ -5,7 +5,8 @@ import DatePicker from "react-datepicker";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
-import { updatePlan } from "../reducers/plan";
+import plan, { updatePlan } from "../reducers/plan";
+import moment from "moment";
 
 const Global = createGlobalStyle`
     .ant-page-header {
@@ -65,10 +66,10 @@ const PlanUpdateLayout = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-
   const planList = location.state.planList;
-  const [start, setStart] = useState(planList[0].start);
-  const [end, setEnd] = useState(planList[0].end);
+
+  const [start, setStart] = useState(moment(planList[0].start)._d);
+  const [end, setEnd] = useState(moment(planList[0].end)._d);
   const [title, setTitle] = useState("");
 
   const onChangePlanText = useCallback((e) => {
@@ -79,7 +80,7 @@ const PlanUpdateLayout = () => {
   const onSubmitUpdate = useCallback(() => {
     dispatch(
       updatePlan({
-        id: 3,
+        id: planList[0].id,
         title,
         start,
         end,
