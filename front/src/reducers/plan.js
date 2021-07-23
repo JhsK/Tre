@@ -31,6 +31,9 @@ export const initialState = {
   removePlanLoading: false,
   removePlanDone: false,
   removePlanError: null,
+  loadPlanLoading: false,
+  loadPlanDone: false,
+  loadPlanError: null,
 };
 
 export const ADD_PLAN_REQUEST = "ADD_PLAN_REQUEST";
@@ -48,6 +51,10 @@ export const REMOVE_PLAN_FAILURE = "REMOVE_PLAN_FAILURE";
 export const DONE_PLAN_REQUEST = "DONE_PLAN_REQUEST";
 export const DONE_PLAN_SUCCESS = "DONE_PLAN_SUCCESS";
 export const DONE_PLAN_FAILURE = "DONE_PLAN_FAILURE";
+
+export const LOAD_PLAN_REQUEST = "LOAD_PLAN_REQUEST";
+export const LOAD_PLAN_SUCCESS = "LOAD_PLAN_SUCCESS";
+export const LOAD_PLAN_FAILURE = "LOAD_PLAN_FAILURE";
 
 export const addPlan = (data) => {
   return {
@@ -111,6 +118,21 @@ const plan = (state = initialState, action) => {
       case REMOVE_PLAN_FAILURE:
         draft.removePlanLoading = false;
         draft.removePlanError = action.error;
+        break;
+      case LOAD_PLAN_REQUEST:
+        draft.loadPlanLoading = true;
+        draft.loadPlanDone = false;
+        draft.loadPlanError = null;
+        break;
+      case LOAD_PLAN_SUCCESS:
+        console.log(action.data);
+        draft.loadPlanLoading = false;
+        draft.loadPlanDone = true;
+        draft.planData = action.data;
+        break;
+      case LOAD_PLAN_FAILURE:
+        draft.loadPlanLoading = false;
+        draft.loadPlanError = action.error;
         break;
       case DONE_PLAN_REQUEST:
         draft.donePlanLoading = true;

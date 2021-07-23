@@ -13,6 +13,9 @@ import {
   DONE_PLAN_REQUEST,
   DONE_PLAN_SUCCESS,
   DONE_PLAN_FAILURE,
+  LOAD_PLAN_REQUEST,
+  LOAD_PLAN_SUCCESS,
+  LOAD_PLAN_FAILURE,
 } from "../reducers/plan";
 
 function addPlanAPI(data) {
@@ -29,6 +32,10 @@ function removePlanAPI(data) {
 
 function donePlanAPI(data) {
   return axios.post("/api/plan", data);
+}
+
+function loadPlanAPI() {
+  return axios.get("/plan/load");
 }
 
 function* addPlan(action) {
@@ -48,10 +55,10 @@ function* addPlan(action) {
 
 function* updatePlan(action) {
   try {
-    const reuslt = yield call(updatePlanAPI, action.data);
+    const result = yield call(updatePlanAPI, action.data);
     yield put({
       type: UPDATE_PLAN_SUCCESS,
-      data: reuslt.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -63,10 +70,10 @@ function* updatePlan(action) {
 
 function* removePlan(action) {
   try {
-    const reuslt = yield call(removePlanAPI, action.id);
+    const result = yield call(removePlanAPI, action.id);
     yield put({
       type: REMOVE_PLAN_SUCCESS,
-      data: reuslt.id,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -92,6 +99,21 @@ function* donePlan(action) {
   }
 }
 
+function* loadPlan(action) {
+  try {
+    const result = yield call(loadPlanAPI);
+    yield put({
+      type: LOAD_PLAN_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_PLAN_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
+
 function* watchAddPlan() {
   yield takeLatest(ADD_PLAN_REQUEST, addPlan);
 }
@@ -108,11 +130,16 @@ function* watchDonePlan() {
   yield takeLatest(DONE_PLAN_REQUEST, donePlan);
 }
 
+function* watchLoadPlan() {
+  yield takeLatest(LOAD_PLAN_REQUEST, loadPlan);
+}
+
 export default function* planSaga() {
   yield all([
     fork(watchAddPlan),
     fork(watchUpdatePlan),
     fork(watchDonePlan),
     fork(watchRemovePlan),
+    fork(watchLoadPlan),
   ]);
 }

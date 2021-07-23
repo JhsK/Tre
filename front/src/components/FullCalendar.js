@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { addPlan } from "../reducers/plan";
+import { addPlan, LOAD_PLAN_REQUEST } from "../reducers/plan";
 import PlanListComponent from "./PlanListComponent";
 
 import FullCalendar from "@fullcalendar/react";
@@ -28,6 +28,13 @@ const FullCalendarTest = () => {
   const [title, setTitle] = useState(""); // 일정 추가 내용
   const [start, setStart] = useState(""); // DatePicker 기본 default 날짜 객체
   const [end, setEnd] = useState(""); // DatePicker 기본 default 날짜 객체
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_PLAN_REQUEST,
+    });
+  }, []);
+
   const handleCancel = useCallback(() => {
     setModalVisible(false);
   }, []);
