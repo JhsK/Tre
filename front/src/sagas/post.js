@@ -25,7 +25,7 @@ function removeAPI(data) {
 }
 
 function loadPostAPI(lastId) {
-  return axios.get(`/posts?lastId?=${lastId || 0}`);
+  return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
 function uploadImagesAPI(data) {

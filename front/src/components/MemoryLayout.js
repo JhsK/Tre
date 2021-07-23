@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 import { PageHeader, Button, Card } from "antd";
@@ -14,7 +14,6 @@ const { Meta } = Card;
 
 const CardContainer = styled.div`
   width: 100%;
-  //height: calc(100% - 85px);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -27,6 +26,12 @@ const CardContainer = styled.div`
     margin: 0 0rem 0rem 0rem;
     height: 370px;
   }
+
+  ${(props) =>
+    props.postLength &&
+    css`
+      height: calc(100% - 85px);
+    `}
 `;
 
 const MemoryLayout = () => {
@@ -34,6 +39,16 @@ const MemoryLayout = () => {
   const [ref, inView] = useInView();
   const { mainPosts, hasMorePost, loadPostLoading, removePostDone } =
     useSelector((state) => state.post);
+
+  useEffect(() => {
+    const lastId = mainPosts[mainPosts.length - 1]?.id;
+    if (hasMorePost) {
+      dispatch({
+        type: LOAD_POST_REQUEST,
+        lastId,
+      });
+    }
+  }, [hasMorePost]);
 
   useEffect(() => {
     if (inView && hasMorePost && !loadPostLoading) {
@@ -44,14 +59,6 @@ const MemoryLayout = () => {
       });
     }
   }, [inView, hasMorePost, loadPostLoading, mainPosts]);
-
-  useEffect(() => {
-    const lastId = mainPosts[mainPosts.length - 1]?.id;
-    dispatch({
-      type: LOAD_POST_REQUEST,
-      lastId,
-    });
-  }, []);
 
   const onClickDelete = useCallback((postId) => {
     dispatch({
@@ -75,7 +82,7 @@ const MemoryLayout = () => {
           ]}
           style={{ borderBottom: "1px solid #f3f3f3" }}
         />
-        <CardContainer>
+        <CardContainer postLength={mainPosts.length > 4 && true}>
           {mainPosts.map((post, index) => (
             <Card
               key={post.id}
