@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import { Radio, Badge } from "antd";
 import { DONE_PLAN_REQUEST, REMOVE_PLAN_REQUEST } from "../../reducers/plan";
 import {
@@ -25,7 +26,6 @@ const ScheduleList = ({ time }) => {
   }, []);
 
   const onDeltePlan = useCallback((id) => {
-    console.log("test!!");
     dispatch({
       type: REMOVE_PLAN_REQUEST,
       id,
@@ -45,8 +45,8 @@ const ScheduleList = ({ time }) => {
               return null;
             }
           }
-          let start = item.start;
-          let end = item.end;
+          let start = moment(item.start)._d;
+          let end = moment(item.end)._d;
           const nowDay = new Date();
           const dday = Math.ceil((end - nowDay) / (1000 * 60 * 60 * 24));
           start =

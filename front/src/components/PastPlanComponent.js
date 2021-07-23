@@ -6,7 +6,7 @@ const PastPlanComponent = () => {
   return (
     <>
       <ListContainer>
-        <ScheduleList titme={false} />
+        <ScheduleList time={false} />
       </ListContainer>
     </>
   );
