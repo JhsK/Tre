@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { LOAD_PLAN_REQUEST } from "../reducers/plan";
-import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import FuturePlanComponent from "./FuturePlanComponent";
 import PastPlanComponent from "./PastPlanComponent";
 
