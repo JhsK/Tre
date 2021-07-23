@@ -72,7 +72,7 @@ router.delete("/:postId", isLoggedIn, async (req, res, next) => {
       where: { id: req.params.postId },
     });
     await deletePost.destroy();
-    res.status(200).json({ PostId: parseInt(req.params.postId, 10) });
+    res.status(200).json(parseInt(req.params.postId, 10));
   } catch (error) {
     console.error(error);
     next(error);
