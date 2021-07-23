@@ -52,7 +52,21 @@ router.delete("/:planId", isLoggedIn, async (req, res, next) => {
       where: { id: req.params.planId },
     });
     await deletePlan.destroy();
-    res.status(200).json({ PlanId: parseInt(req.params.planId) });
+    res.status(200).json(parseInt(req.params.planId));
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get("/load", isLoggedIn, async (req, res, next) => {
+  try {
+    const plans = await Plan.findAll({
+      where: {
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json(plans);
   } catch (error) {
     console.error(error);
     next(error);
