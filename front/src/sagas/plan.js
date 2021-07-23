@@ -24,7 +24,7 @@ function updatePlanAPI(data) {
 }
 
 function removePlanAPI(data) {
-  return axios.post("/api/plan", data);
+  return axios.delete(`/plan/${data}`);
 }
 
 function donePlanAPI(data) {
@@ -63,10 +63,10 @@ function* updatePlan(action) {
 
 function* removePlan(action) {
   try {
-    //const reuslt = yield call(removePlanAPI, action.data);
+    const reuslt = yield call(removePlanAPI, action.id);
     yield put({
       type: REMOVE_PLAN_SUCCESS,
-      data: action.id,
+      data: reuslt.id,
     });
   } catch (err) {
     yield put({
