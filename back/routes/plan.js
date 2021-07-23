@@ -23,7 +23,6 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 
 router.patch("/:planId", isLoggedIn, async (req, res, next) => {
   try {
-    console.log("!$!@$!@$!@$!@$!@$!@$!@$");
     await Plan.update(
       {
         title: req.body.title,
@@ -41,6 +40,19 @@ router.patch("/:planId", isLoggedIn, async (req, res, next) => {
       },
     });
     res.status(200).json(plan);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.delete("/:planId", isLoggedIn, async (req, res, next) => {
+  try {
+    const deletePlan = await Plan.findOne({
+      where: { id: req.params.planId },
+    });
+    await deletePlan.destroy();
+    res.status(200).json({ PlanId: parseInt(req.params.planId) });
   } catch (error) {
     console.error(error);
     next(error);
