@@ -38,4 +38,4 @@
  - 🖥 [화면 설계서](https://whimsical.com/tre-5wLaojqAbXzzNZWW5z2gqX)
  - ⚙ [기능 명세서](https://www.notion.so/difunto/ac01f0efd7eb4b35983bf17234bf0e5a)
  - 🗂 [DB 명세서](https://www.notion.so/difunto/DB-824da7f74d7640ae9dc1f1435f2fbf8a)
- - 📬 API 명세서
+ - 📬 [API 명세서](https://difunto.notion.site/API-84e36242c67443ddad2ec61d02162780)
