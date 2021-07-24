@@ -37,8 +37,8 @@ function nickChangeAPI(data) {
   return axios.patch("/user/nickname", { nickname: data });
 }
 
-function emailChangeAPI() {
-  return axios.post("/api/signUp");
+function emailChangeAPI(data) {
+  return axios.patch("/user/email", { email: data });
 }
 
 function loadMyInfoAPI() {
@@ -107,11 +107,10 @@ function* nickChagne(action) {
 
 function* emailChange(action) {
   try {
-    yield delay(1000);
-    //const result = yield call(emailChangeAPI, action.data);
+    const result = yield call(emailChangeAPI, action.data);
     yield put({
       type: EMAIL_CHANGE_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({

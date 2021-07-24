@@ -130,7 +130,7 @@ const user = (state = initialState, action) => {
         draft.emailChangeError = null;
         break;
       case EMAIL_CHANGE_SUCCESS:
-        draft.user.email = action.data;
+        draft.user.email = action.data.email;
         draft.emailChangeLoading = false;
         draft.emailChangeDone = true;
         break;
