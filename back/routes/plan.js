@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { Plan, User } = require("../models");
+const { Plan } = require("../models");
 const { isLoggedIn } = require("./middlewares");
 
 const router = express.Router();

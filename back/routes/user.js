@@ -109,4 +109,21 @@ router.patch("/nickname", isLoggedIn, async (req, res) => {
   }
 });
 
+router.patch("/email", isLoggedIn, async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        email: req.body.email,
+      },
+      {
+        where: { id: req.user.id },
+      }
+    );
+    res.status(200).json({ email: req.body.email });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 module.exports = router;
