@@ -16,6 +16,9 @@ export const initialState = {
   uploadImagesLoading: false,
   uploadImagesDone: false,
   uploadImagesError: null,
+  loadPostOneLoading: false,
+  loadPostOneDone: false,
+  loadPostOneError: null,
 };
 
 export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
@@ -33,6 +36,10 @@ export const REMOVE_POST_FAILURE = "REMOVE_POST_FAILURE";
 export const UPLOAD_IMAGES_REQUEST = "UPLOAD_IMAGES_REQUEST";
 export const UPLOAD_IMAGES_SUCCESS = "UPLOAD_IMAGES_SUCCESS";
 export const UPLOAD_IMAGES_FAILURE = "UPLOAD_IMAGES_FAILURE";
+
+export const LOAD_POST_ONE_REQUEST = "LOAD_POST_ONE_REQUEST";
+export const LOAD_POST_ONE_SUCCESS = "LOAD_POST_ONE_SUCCESS";
+export const LOAD_POST_ONE_FAILURE = "LOAD_POST_ONE_FAILURE";
 
 export const REMOVE_IMAGE = "REMOVE_IMAGE";
 
@@ -57,8 +64,22 @@ const post = (state = initialState, action) => {
         draft.hasMorePost = action.data.length === 10;
         break;
       case LOAD_POST_FAILURE:
-        draft.addPostLoading = false;
-        draft.addPostError = action.error;
+        draft.loadPostLoading = false;
+        draft.loadPostError = action.error;
+        break;
+      case LOAD_POST_ONE_REQUEST:
+        draft.loadPosOnetLoading = true;
+        draft.loadPosOnetDone = false;
+        draft.loadPosOnetError = null;
+        break;
+      case LOAD_POST_ONE_SUCCESS:
+        draft.loadPostOneLoading = false;
+        draft.loadPostOneDone = true;
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        break;
+      case LOAD_POST_ONE_FAILURE:
+        draft.addPostOneLoading = false;
+        draft.addPostOneError = action.error;
         break;
       case ADD_POST_REQUEST:
         draft.addPostLoading = true;
