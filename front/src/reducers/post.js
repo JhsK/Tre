@@ -75,7 +75,7 @@ const post = (state = initialState, action) => {
       case LOAD_POST_ONE_SUCCESS:
         draft.loadPostOneLoading = false;
         draft.loadPostOneDone = true;
-        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.mainPosts = action.data;
         break;
       case LOAD_POST_ONE_FAILURE:
         draft.addPostOneLoading = false;

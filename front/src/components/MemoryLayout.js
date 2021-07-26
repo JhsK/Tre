@@ -40,15 +40,15 @@ const MemoryLayout = () => {
   const { mainPosts, hasMorePost, loadPostLoading, removePostDone } =
     useSelector((state) => state.post);
 
-  useEffect(() => {
-    const lastId = mainPosts[mainPosts.length - 1]?.id;
-    if (hasMorePost) {
-      dispatch({
-        type: LOAD_POST_REQUEST,
-        lastId,
-      });
-    }
-  }, [hasMorePost]);
+  // useEffect(() => {
+  //   const lastId = mainPosts[mainPosts.length - 1]?.id;
+  //   if (hasMorePost) {
+  //     dispatch({
+  //       type: LOAD_POST_REQUEST,
+  //       lastId,
+  //     });
+  //   }
+  // }, [hasMorePost]);
 
   useEffect(() => {
     if (inView && hasMorePost && !loadPostLoading) {

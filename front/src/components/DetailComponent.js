@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import { PageHeader, Rate } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { LOAD_POST_ONE_REQUEST } from "../reducers/post";
 
 const DetailContainer = styled.div`
   width: 600px;
@@ -18,8 +19,18 @@ const DetailContainer = styled.div`
 
 const DetailComponent = ({ text }) => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { mainPosts } = useSelector((state) => state.post);
-  const post = mainPosts.filter((a, i) => a.id === 1);
+  const imgSrc = "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4";
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_POST_ONE_REQUEST,
+      id,
+    });
+  }, []);
+
+  console.log(mainPosts);
 
   return (
     <StyledBackground>
@@ -33,22 +44,22 @@ const DetailComponent = ({ text }) => {
         />
         <DetailContainer>
           <PageHeader
-            title={post[0].title}
+            title={mainPosts.title}
             avatar={{
               src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
             }}
             style={{ borderBottom: "1px solid #f3f3f3", padding: "10px 20px" }}
           />
           <img
-            src="https://avatars1.githubusercontent.com/u/8186664?s=460&v=4"
+            src={imgSrc}
             alt="test"
             style={{ width: "100%", height: "400px" }}
           />
           <Rate
-            value={post[0].rate}
+            value={mainPosts.rate}
             style={{ padding: "0 20px", margin: "1rem 0" }}
           />
-          <div style={{ padding: "0 20px" }}>{post[0].content}</div>
+          <div style={{ padding: "0 20px" }}>{mainPosts.content}</div>
         </DetailContainer>
       </FrameStyled>
     </StyledBackground>

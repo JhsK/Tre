@@ -14,6 +14,8 @@ import {
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_SUCCESS,
   LOAD_POST_ONE_REQUEST,
+  LOAD_POST_ONE_SUCCESS,
+  LOAD_POST_ONE_FAILURE,
 } from "../reducers/post";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../reducers/user";
 
@@ -33,8 +35,8 @@ function uploadImagesAPI(data) {
   return axios.post("/post/images", data);
 }
 
-function loadPostOneAPI(data) {
-  return axios.get("/post/images", data);
+function loadPostOneAPI(id) {
+  return axios.get(`post/${id}`);
 }
 
 function* addPost(action) {
@@ -110,15 +112,15 @@ function* uploadImages(action) {
 
 function* loadPostOne(action) {
   try {
-    const result = yield call(loadPostOneAPI, action.data);
+    const result = yield call(loadPostOneAPI, action.id);
     yield put({
-      type: UPLOAD_IMAGES_SUCCESS,
+      type: LOAD_POST_ONE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.log(err);
     yield put({
-      type: UPLOAD_IMAGES_FAILURE,
+      type: LOAD_POST_ONE_FAILURE,
       data: err.response.data,
     });
   }
