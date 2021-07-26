@@ -66,6 +66,18 @@ router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
   }
 });
 
+router.get("/:postId", isLoggedIn, async (req, res, next) => {
+  try {
+    const detailPost = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    res.status(200).json(detailPost);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.delete("/:postId", isLoggedIn, async (req, res, next) => {
   try {
     const deletePost = await Post.findOne({
