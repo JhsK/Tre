@@ -66,31 +66,6 @@ router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
   }
 });
 
-router.get("/:postId", isLoggedIn, async (req, res, next) => {
-  try {
-    const detailPost = await Post.findOne({
-      where: { id: req.params.postId },
-    });
-    res.status(200).json(detailPost);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-router.delete("/:postId", isLoggedIn, async (req, res, next) => {
-  try {
-    const deletePost = await Post.findOne({
-      where: { id: req.params.postId },
-    });
-    await deletePost.destroy();
-    res.status(200).json(parseInt(req.params.postId, 10));
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
 router.post(
   "/images",
   isLoggedIn,
@@ -104,5 +79,18 @@ router.post(
     }
   }
 );
+
+router.delete("/:postId", isLoggedIn, async (req, res, next) => {
+  try {
+    const deletePost = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    await deletePost.destroy();
+    res.status(200).json(parseInt(req.params.postId, 10));
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
 
 module.exports = router;
