@@ -53,6 +53,7 @@ export const ImageWrapper = styled.div`
 
   & img {
     margin: 0 auto;
+    width: 100%;
     max-height: 750px;
   }
 `;
@@ -61,6 +62,23 @@ export const Global = createGlobalStyle`
     .slick-slide {
         display: inline-block;
     }
+    /* .slick-arrow {
+      border-radius: 50px;
+    }
+    .slick-prev {
+      position:absolute;
+      top:40%;
+      left: 10px;
+      transform:translateY(-50%);
+      z-index: 1000;
+    }
+    .slick-next {
+      position:absolute;
+      top:40%;
+      right: 10px;
+      transform:translateY(-50%);
+      z-index: 1000;
+    } */
     .ant-card-cover {
         transform: none !important;
     }

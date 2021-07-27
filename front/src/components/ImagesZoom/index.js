@@ -12,6 +12,7 @@ import {
 
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  console.log(images);
   return (
     <Overlay>
       <Global />
@@ -24,13 +25,13 @@ const ImagesZoom = ({ images, onClose }) => {
           initialSlide={0}
           beforeChange={(slide) => setCurrentSlide(slide)}
           infinite
-          arrows={false}
+          fade
           slidesToShow={1}
           slidesToScroll={1}
         >
           {images.map((v) => (
             <ImageWrapper key={v.src}>
-              <img src={`http://localhost:3065${v.src}`} alt={v.src} />
+              <img src={`http://localhost:3065/${v.src}`} alt={v.src} />
             </ImageWrapper>
           ))}
         </Slick>

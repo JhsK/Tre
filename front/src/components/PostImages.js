@@ -38,13 +38,13 @@ const PostImages = ({ images }) => {
       <>
         <img
           src={`http://localhost:3065/${images[0].src}`}
-          style={{ width: "50%", display: "inline-block", maxHeight: "200px" }}
+          style={{ width: "50%", display: "inline-block", height: "200px" }}
           alt={images[0].src}
           onClick={onZoom}
         />
         <img
           src={`http://localhost:3065/${images[1].src}`}
-          style={{ width: "50%", display: "inline-block", maxHeight: "200px" }}
+          style={{ width: "50%", display: "inline-block", height: "200px" }}
           alt={images[1].src}
           onClick={onZoom}
         />
@@ -60,7 +60,7 @@ const PostImages = ({ images }) => {
           width="50%"
           alt={images[0].src}
           onClick={onZoom}
-          style={{ maxHeight: "200px" }}
+          style={{ height: "200px" }}
         />
         <ImagesContainer onClick={onZoom}>
           <PlusOutlined />
