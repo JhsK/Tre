@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Join from "./pages/join";
 import Login from "./pages/login";
 import PasswordFind from "./pages/passwordFind";
@@ -27,8 +27,10 @@ const App = () => {
       <Route path="/calendar" component={Calendar} exact />
       <Route path="/calendar/:id" component={PlanUpdate} exact />
       <Route path="/memory" component={Memory} exact />
-      <Route path="/memory/write" component={Write} exact />
-      <Route path="/memory/:id" component={Detail} exact />
+      <Switch>
+        <Route path="/memory/write" component={Write} exact />
+        <Route path="/memory/:id" component={Detail} exact />
+      </Switch>
       <Route path="/info" component={Info} exact />
     </>
   );

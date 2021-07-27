@@ -5,10 +5,12 @@ import { ScheduleContainer } from "./schedule";
 
 const Memory = () => {
   return (
-    <ScheduleContainer>
-      <MenuComponents />
-      <MemoryLayout />
-    </ScheduleContainer>
+    <>
+      <ScheduleContainer>
+        <MenuComponents />
+        <MemoryLayout />
+      </ScheduleContainer>
+    </>
   );
 };
 
