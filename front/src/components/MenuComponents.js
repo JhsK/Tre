@@ -66,7 +66,8 @@ const MenuComponents = () => {
       >
         <LogoImg
           src={
-            pathURL === "/memory/test" || pathURL === "/memory/write"
+            pathURL[pathURL.indexOf("memory") + 2] ||
+            pathURL === "/memory/write"
               ? imgSrcTwoDepth
               : imgSrcOneDepth
           }
