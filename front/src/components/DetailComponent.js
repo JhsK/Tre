@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { StyledBackground, FrameStyled } from "./ScheduleLayout";
 import { PageHeader, Rate } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { LOAD_POST_ONE_REQUEST } from "../reducers/post";
+import DetailPostImages from "./DetailPostImages";
 
 const DetailContainer = styled.div`
   width: 600px;
@@ -17,20 +17,10 @@ const DetailContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const DetailComponent = ({ text }) => {
+const DetailComponent = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
   const { mainPosts } = useSelector((state) => state.post);
-  const imgSrc = "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4";
-
-  useEffect(() => {
-    dispatch({
-      type: LOAD_POST_ONE_REQUEST,
-      id,
-    });
-  }, []);
-
-  console.log(mainPosts);
+  const detailPost = mainPosts.filter((item) => item.id === Number(id));
 
   return (
     <StyledBackground>
@@ -44,22 +34,26 @@ const DetailComponent = ({ text }) => {
         />
         <DetailContainer>
           <PageHeader
-            title={mainPosts.title}
+            title={detailPost[0].title}
             avatar={{
               src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4",
             }}
             style={{ borderBottom: "1px solid #f3f3f3", padding: "10px 20px" }}
           />
-          <img
-            src={imgSrc}
-            alt="test"
-            style={{ width: "100%", height: "400px" }}
-          />
+          {detailPost[0].Images.length > 0 ? (
+            <DetailPostImages images={detailPost[0].Images} />
+          ) : (
+            <img
+              src="https://avatars1.githubusercontent.com/u/8186664?s=460&v=4"
+              alt="test"
+              style={{ width: "100%", height: "400px" }}
+            />
+          )}
           <Rate
-            value={mainPosts.rate}
+            value={detailPost[0].rate}
             style={{ padding: "0 20px", margin: "1rem 0" }}
           />
-          <div style={{ padding: "0 20px" }}>{mainPosts.content}</div>
+          <div style={{ padding: "0 20px" }}>{detailPost[0].content}</div>
         </DetailContainer>
       </FrameStyled>
     </StyledBackground>

@@ -12,7 +12,7 @@ const ImagesContainer = styled.div`
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
-
+  console.log(images);
   const onZoom = useCallback(() => {
     setShowImagesZoom(true);
   }, []);

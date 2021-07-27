@@ -37,18 +37,19 @@ const CardContainer = styled.div`
 const MemoryLayout = () => {
   const dispatch = useDispatch();
   const [ref, inView] = useInView();
-  const { mainPosts, hasMorePost, loadPostLoading, removePostDone } =
-    useSelector((state) => state.post);
+  const { mainPosts, hasMorePost, loadPostLoading } = useSelector(
+    (state) => state.post
+  );
 
-  // useEffect(() => {
-  //   const lastId = mainPosts[mainPosts.length - 1]?.id;
-  //   if (hasMorePost) {
-  //     dispatch({
-  //       type: LOAD_POST_REQUEST,
-  //       lastId,
-  //     });
-  //   }
-  // }, [hasMorePost]);
+  useEffect(() => {
+    const lastId = mainPosts[mainPosts.length - 1]?.id;
+    if (hasMorePost) {
+      dispatch({
+        type: LOAD_POST_REQUEST,
+        lastId,
+      });
+    }
+  }, [hasMorePost]);
 
   useEffect(() => {
     if (inView && hasMorePost && !loadPostLoading) {
@@ -106,7 +107,7 @@ const MemoryLayout = () => {
                 />,
               ]}
             >
-              <Link to={`/memory/${post.id}`} text="test">
+              <Link to={`/memory/${post.id}`}>
                 <Meta
                   title={post.title}
                   description={
