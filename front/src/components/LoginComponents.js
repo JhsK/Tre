@@ -23,9 +23,7 @@ const KakaoBtn = styled.button`
 const LoginComponents = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { logInLoading, logInError, logInDone, user } = useSelector(
-    (state) => state.user
-  );
+  const { logInLoading, logInError, user } = useSelector((state) => state.user);
   const [username, onChangeUsername] = useInput("");
   const [password, onChangePassword] = useInput("");
 
@@ -118,7 +116,9 @@ const LoginComponents = () => {
           <Link to="/join">회원가입</Link>
         </Form.Item>
       </Form>
-      <KakaoBtn />
+      <KakaoBtn>
+        <a href="http://localhost:3065/user/kakao">s</a>
+      </KakaoBtn>
     </>
   );
 };
