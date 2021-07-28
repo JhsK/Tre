@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
 
-const size = {
+export const size = {
   mobile: 320,
-  tablet: 768,
+  tabletSmall: 600,
+  tabletLarge: 900,
   desktop: 1024,
 };
 
-const media = Object.keys(size).reduce((acc, label) => {
+export const media = Object.keys(size).reduce((acc, label) => {
   acc[label] = (...args) => css`
     @media (max-width: ${size[label] / 16}em) {
       ${css(...args)};

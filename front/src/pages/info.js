@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuComponents from "../components/MenuComponents";
 import InfoLayout from "../components/InfoLayout";
 import { ScheduleContainer } from "./schedule";
+import { size } from "../components/style/theme";
 
-const info = () => {
+const Info = () => {
+  const [clientWidth, setClientWidth] = useState(window.innerWidth);
+
   return (
     <ScheduleContainer>
-      <MenuComponents />
+      {clientWidth > size.tabletSmall && <MenuComponents />}
       <InfoLayout />
     </ScheduleContainer>
   );
 };
 
-export default info;
+export default Info;

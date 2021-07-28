@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Menu } from "antd";
 import {
   ScheduleOutlined,
@@ -11,6 +11,7 @@ import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
+import { size } from "./style/theme";
 import { logoutRequestAction } from "../reducers/user";
 
 const { SubMenu } = Menu;
@@ -62,9 +63,17 @@ const MenuComponents = () => {
   const pathURL = history.location.pathname;
   const dispatch = useDispatch();
   const [menuState, setMenuState] = useState(false);
+  const [clientWidth, setClientWidth] = useState(window.innerWidth);
 
   const imgSrcOneDepth = "image/logo.png";
   const imgSrcTwoDepth = "../image/logo.png";
+
+  useEffect(() => {
+    setClientWidth(window.innerWidth);
+    if (clientWidth <= size.tabletLarge) {
+      setMenuState(true);
+    }
+  }, []);
 
   const onClickMediaMenu = useCallback(() => {
     setMenuState((prev) => !prev);
