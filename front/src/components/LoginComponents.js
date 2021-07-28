@@ -9,14 +9,12 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const KakaoBtn = styled.button`
+const KakaoBtn = styled.a`
   width: 100%;
   height: 50px;
   background-image: url("image/kakao_login_medium_wide (1).png");
   background-repeat: no-repeat;
   background-position: center;
-  border: none;
-  background-color: #fff;
   cursor: pointer;
 `;
 
@@ -116,9 +114,7 @@ const LoginComponents = () => {
           <Link to="/join">회원가입</Link>
         </Form.Item>
       </Form>
-      <KakaoBtn>
-        <a href="http://localhost:3065/user/kakao">s</a>
-      </KakaoBtn>
+      <KakaoBtn href="http://localhost:3065/user/kakao" />
     </>
   );
 };
