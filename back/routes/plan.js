@@ -21,6 +21,42 @@ router.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.get("/load", isLoggedIn, async (req, res, next) => {
+  try {
+    const plans = await Plan.findAll({
+      where: {
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json(plans);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.patch("/done/:planId", isLoggedIn, async (req, res, next) => {
+  try {
+    await Plan.update(
+      {
+        planDoneCheck: 1,
+      },
+      {
+        where: { id: req.params.planId },
+      }
+    );
+    const plans = await Plan.findAll({
+      where: {
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json(plans);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.patch("/:planId", isLoggedIn, async (req, res, next) => {
   try {
     await Plan.update(
@@ -53,20 +89,6 @@ router.delete("/:planId", isLoggedIn, async (req, res, next) => {
     });
     await deletePlan.destroy();
     res.status(200).json(parseInt(req.params.planId));
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-router.get("/load", isLoggedIn, async (req, res, next) => {
-  try {
-    const plans = await Plan.findAll({
-      where: {
-        UserId: req.user.id,
-      },
-    });
-    res.status(200).json(plans);
   } catch (error) {
     console.error(error);
     next(error);
