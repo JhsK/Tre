@@ -15,7 +15,7 @@ const tabContents = {
 export const StyledBackground = styled.div`
   background-color: #dfe6ed;
   position: relative;
-  width: 90%;
+  width: 100%;
   height: 100%;
 `;
 
