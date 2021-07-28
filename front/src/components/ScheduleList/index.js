@@ -1,12 +1,8 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { Radio, Badge } from "antd";
-import {
-  DONE_PLAN_REQUEST,
-  LOAD_PLAN_REQUEST,
-  REMOVE_PLAN_REQUEST,
-} from "../../reducers/plan";
+import { DONE_PLAN_REQUEST, REMOVE_PLAN_REQUEST } from "../../reducers/plan";
 import {
   RadioContainer,
   Global,
@@ -21,13 +17,6 @@ import {
 const ScheduleList = ({ time }) => {
   const dispatch = useDispatch();
   const planData = useSelector((state) => state.plan.planData);
-  const { removePlanDone } = useSelector((state) => state.plan);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_PLAN_REQUEST,
-  //   });
-  // }, [removePlanDone]);
 
   const onClickRadio = useCallback((id) => {
     dispatch({

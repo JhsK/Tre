@@ -125,7 +125,6 @@ const plan = (state = initialState, action) => {
         draft.loadPlanError = null;
         break;
       case LOAD_PLAN_SUCCESS:
-        console.log(action.data);
         draft.loadPlanLoading = false;
         draft.loadPlanDone = true;
         draft.planData = action.data;
@@ -140,11 +139,12 @@ const plan = (state = initialState, action) => {
         draft.donePlanError = null;
         break;
       case DONE_PLAN_SUCCESS:
-        const planDatas = draft.planData;
-        planDatas[
-          draft.planData.findIndex((a) => a.id === action.data)
-        ].planDoneCheck = true;
-        draft.planData = planDatas;
+        // const planDatas = draft.planData;
+        // planDatas[
+        //   draft.planData.findIndex((a) => a.id === action.data)
+        // ].planDoneCheck = true;
+        // draft.planData = planDatas;
+        draft.planData = action.data;
         draft.donePlanLoading = false;
         draft.donePlanDone = true;
         break;
