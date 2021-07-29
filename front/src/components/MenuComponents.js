@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Menu } from "antd";
 import {
   ScheduleOutlined,
@@ -6,12 +6,11 @@ import {
   HourglassOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import styled, { createGlobalStyle, css } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import LoginForm from "./style/LoginForm.css";
-import { size } from "./style/theme";
 import { logoutRequestAction } from "../reducers/user";
 
 const { SubMenu } = Menu;
@@ -24,29 +23,10 @@ const MenuStyled = styled(Menu)`
   width: 15%;
   height: 100%;
 
-  ${(props) =>
-    props.menuProps &&
-    css`
-      width: 10%;
-      margin-top: 5rem;
-    `}
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
-
-// export const MenuBtn = styled.button`
-//   position: absolute;
-//   right: 100px;
-//   bottom: 100px;
-//   background-image: url("image/mediaBtn.png");
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-size: cover;
-//   background-color: #fff;
-//   cursor: pointer;
-//   border: none;
-//   width: 80px;
-//   height: 80px;
-//   z-index: 8000;
-// `;
 
 const Global = createGlobalStyle`
   .ant-menu-item {
@@ -63,21 +43,9 @@ const MenuComponents = () => {
   const pathURL = history.location.pathname;
   const dispatch = useDispatch();
   const [menuState, setMenuState] = useState(false);
-  const [clientWidth, setClientWidth] = useState(window.innerWidth);
 
   const imgSrcOneDepth = "image/logo.png";
   const imgSrcTwoDepth = "../image/logo.png";
-
-  useEffect(() => {
-    setClientWidth(window.innerWidth);
-    if (clientWidth <= size.tabletLarge) {
-      setMenuState(true);
-    }
-  }, []);
-
-  const onClickMediaMenu = useCallback(() => {
-    setMenuState((prev) => !prev);
-  }, []);
 
   const onClickedLogout = useCallback(() => {
     dispatch(logoutRequestAction());
@@ -87,7 +55,7 @@ const MenuComponents = () => {
   return (
     <>
       <MenuStyled
-        //style={{ width: "15%", height: "100%" }}
+        style={{ width: "15%", height: "100%" }}
         menuProps={menuState}
         defaultSelectedKeys={["1"]}
         mode="inline"
@@ -148,7 +116,6 @@ const MenuComponents = () => {
           </Menu.Item>
         </SubMenu>
       </MenuStyled>
-      {/* <MenuBtn type="button" onClick={onClickMediaMenu} /> */}
     </>
   );
 };

@@ -9,6 +9,7 @@ import {
   SmileTwoTone,
   UnlockTwoTone,
 } from "@ant-design/icons";
+import { size, media } from "./style/theme";
 
 const UtilBtn = styled.button`
   position: fixed;
@@ -26,38 +27,40 @@ const UtilBtn = styled.button`
   z-index: 8000;
   display: none;
 
-  @media (max-width: 900px) {
+  /* @media (max-width: ${size.tabletLarge}) {
     display: inline;
-  }
+  } */
+
+  ${media.tabletLarge`display: inline;`}
 `;
 
 const PublicBtn = () => {
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="plan">
         <Link to="/">
           <ScheduleTwoTone style={{ marginRight: "0.3rem" }} />
           계획
         </Link>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="calendar">
         <Link to="/calendar">
           <CalendarTwoTone style={{ marginRight: "0.3rem" }} />
           달력
         </Link>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="memory">
         <Link to="/memory">
           <HourglassTwoTone style={{ marginRight: "0.3rem" }} />
           추억
         </Link>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="info">
         <Link to="/info">
           <SmileTwoTone style={{ marginRight: "0.3rem" }} />내 정보
         </Link>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="logout">
         <Link to="/logout">
           <UnlockTwoTone style={{ marginRight: "0.3rem" }} />
           로그아웃
