@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POST_REQUEST, REMOVE_POST_REQUEST } from "../reducers/post";
 import { useInView } from "react-intersection-observer";
 import PostImages from "./PostImages";
+import { size, media } from "./style/theme";
 
 const { Meta } = Card;
 
@@ -24,13 +25,17 @@ const CardContainer = styled.div`
   .card-item {
     width: 23%;
     margin: 0 0rem 0rem 0rem;
-    height: 370px;
+    //height: 370px;
+    height: 100%;
+
+    ${media.tabletLarge`width: 45%;`}
+    ${media.desktop`width: 30%;`}
   }
 
   ${(props) =>
     props.postLength &&
     css`
-      height: calc(100% - 85px);
+      //height: calc(100% - 85px);
     `}
 `;
 
