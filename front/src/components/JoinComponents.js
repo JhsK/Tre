@@ -144,7 +144,7 @@ const JoinComponents = () => {
             회원가입
           </Button>
         </Form.Item>
-        <Link to="/join">로그인</Link>
+        <Link to="/">로그인</Link>
       </Form>
     </>
   );

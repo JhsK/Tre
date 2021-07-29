@@ -28,8 +28,9 @@ const CardContainer = styled.div`
     //height: 370px;
     height: 100%;
 
-    ${media.tabletLarge`width: 45%;`}
     ${media.desktop`width: 30%;`}
+    ${media.tabletLarge`width: 45%;`}
+    ${media.mobile`width:950%;`}
   }
 
   ${(props) =>

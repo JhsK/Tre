@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Menu, Dropdown } from "antd";
 import {
   ScheduleTwoTone,
@@ -9,11 +10,12 @@ import {
   SmileTwoTone,
   UnlockTwoTone,
 } from "@ant-design/icons";
-import { size, media } from "./style/theme";
+import { media } from "./style/theme";
+import { logoutRequestAction } from "../reducers/user";
 
 const UtilBtn = styled.button`
   position: fixed;
-  right: 100px;
+  right: 60px;
   bottom: 100px;
   background-image: url("image/mediaBtn.png");
   background-repeat: no-repeat;
@@ -22,19 +24,25 @@ const UtilBtn = styled.button`
   background-color: #fff;
   cursor: pointer;
   border: none;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   z-index: 8000;
   display: none;
-
-  /* @media (max-width: ${size.tabletLarge}) {
-    display: inline;
-  } */
+  border-radius: 60px;
 
   ${media.tabletLarge`display: inline;`}
+  ${media.mobile`bottom: 30px; right:30px;`}
 `;
 
 const PublicBtn = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onClickedLogout = useCallback(() => {
+    dispatch(logoutRequestAction());
+    history.push("/");
+  }, []);
+
   const menu = (
     <Menu>
       <Menu.Item key="plan">
@@ -60,18 +68,16 @@ const PublicBtn = () => {
           <SmileTwoTone style={{ marginRight: "0.3rem" }} />내 정보
         </Link>
       </Menu.Item>
-      <Menu.Item key="logout">
-        <Link to="/logout">
-          <UnlockTwoTone style={{ marginRight: "0.3rem" }} />
-          로그아웃
-        </Link>
+      <Menu.Item key="logout" onClick={onClickedLogout}>
+        <UnlockTwoTone style={{ marginRight: "0.3rem" }} />
+        로그아웃
       </Menu.Item>
     </Menu>
   );
 
   return (
     <>
-      <Dropdown overlay={menu}>
+      <Dropdown overlay={menu} trigger={["click"]}>
         <UtilBtn />
       </Dropdown>
     </>

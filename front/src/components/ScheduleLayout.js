@@ -28,6 +28,7 @@ export const FrameStyled = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
+  overflow: auto;
 `;
 
 const TabsContainer = styled.div`

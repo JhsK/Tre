@@ -96,10 +96,8 @@ const LoginComponents = () => {
             onChange={onChangePassword}
           />
         </Form.Item>
-        <Form.Item>
-          <Link to="/password" className="login-form-forgot">
-            비밀번호 찾기
-          </Link>
+        <Form.Item onClick={() => alert("준비중 입니다.")}>
+          <Link className="login-form-forgot">비밀번호 찾기</Link>
         </Form.Item>
 
         <Form.Item>
