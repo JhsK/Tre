@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MenuComponents from "../components/MenuComponents";
 import FullCalendar from "../components/FullCalendar";
+import PublicBtn from "../components/PublicBtn";
 import { ScheduleContainer } from "./schedule";
 import { size } from "../components/style/theme";
 
@@ -11,6 +12,7 @@ const Calendar = () => {
     <ScheduleContainer>
       {clientWidth > size.tabletSmall && <MenuComponents />}
       <FullCalendar />
+      <PublicBtn />
     </ScheduleContainer>
   );
 };

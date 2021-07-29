@@ -32,21 +32,21 @@ const MenuStyled = styled(Menu)`
     `}
 `;
 
-const MenuBtn = styled.button`
-  position: absolute;
-  right: 100px;
-  bottom: 100px;
-  background-image: url("image/mediaBtn.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-color: #fff;
-  cursor: pointer;
-  border: none;
-  width: 80px;
-  height: 80px;
-  z-index: 8000;
-`;
+// export const MenuBtn = styled.button`
+//   position: absolute;
+//   right: 100px;
+//   bottom: 100px;
+//   background-image: url("image/mediaBtn.png");
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: cover;
+//   background-color: #fff;
+//   cursor: pointer;
+//   border: none;
+//   width: 80px;
+//   height: 80px;
+//   z-index: 8000;
+// `;
 
 const Global = createGlobalStyle`
   .ant-menu-item {
@@ -148,7 +148,7 @@ const MenuComponents = () => {
           </Menu.Item>
         </SubMenu>
       </MenuStyled>
-      <MenuBtn type="button" onClick={onClickMediaMenu} />
+      {/* <MenuBtn type="button" onClick={onClickMediaMenu} /> */}
     </>
   );
 };

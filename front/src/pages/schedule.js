@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MenuComponents from "../components/MenuComponents";
 import ScheduleLayout from "../components/ScheduleLayout";
+import PublicBtn from "../components/PublicBtn";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -27,6 +28,7 @@ const Schedule = () => {
     <ScheduleContainer>
       {clientWidth > size.tabletSmall && <MenuComponents />}
       <ScheduleLayout />
+      <PublicBtn />
     </ScheduleContainer>
   );
 };

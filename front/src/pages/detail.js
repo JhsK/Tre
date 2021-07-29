@@ -1,6 +1,7 @@
 import React from "react";
 import MenuComponents from "../components/MenuComponents";
 import DetailComponent from "../components/DetailComponent";
+import PublicBtn from "../components/PublicBtn";
 import { ScheduleContainer } from "./schedule";
 
 const detail = () => {
@@ -8,6 +9,7 @@ const detail = () => {
     <ScheduleContainer>
       <MenuComponents />
       <DetailComponent />
+      <PublicBtn />
     </ScheduleContainer>
   );
 };
