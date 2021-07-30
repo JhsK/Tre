@@ -41,7 +41,7 @@ const PublicBtn = () => {
   const onClickedLogout = useCallback(() => {
     dispatch(logoutRequestAction());
     history.push("/");
-  }, []);
+  }, [history, dispatch]);
 
   const menu = (
     <Menu>

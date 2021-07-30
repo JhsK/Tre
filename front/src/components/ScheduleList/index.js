@@ -18,19 +18,25 @@ const ScheduleList = ({ time }) => {
   const dispatch = useDispatch();
   const planData = useSelector((state) => state.plan.planData);
 
-  const onClickRadio = useCallback((id) => {
-    dispatch({
-      type: DONE_PLAN_REQUEST,
-      id,
-    });
-  }, []);
+  const onClickRadio = useCallback(
+    (id) => {
+      dispatch({
+        type: DONE_PLAN_REQUEST,
+        id,
+      });
+    },
+    [dispatch]
+  );
 
-  const onDeltePlan = useCallback((id) => {
-    dispatch({
-      type: REMOVE_PLAN_REQUEST,
-      id,
-    });
-  }, []);
+  const onDeltePlan = useCallback(
+    (id) => {
+      dispatch({
+        type: REMOVE_PLAN_REQUEST,
+        id,
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <>

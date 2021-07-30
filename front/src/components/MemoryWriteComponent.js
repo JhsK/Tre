@@ -54,16 +54,19 @@ const MemoryWriteComponent = () => {
   const [writeContent, onChangeWriteContent] = useInput("");
   const imageInput = useRef();
 
-  const onChangeImages = useCallback((e) => {
-    const imageFormData = new FormData();
-    [].forEach.call(e.target.files, (f) => {
-      imageFormData.append("image", f);
-    });
-    dispatch({
-      type: UPLOAD_IMAGES_REQUEST,
-      data: imageFormData,
-    });
-  }, []);
+  const onChangeImages = useCallback(
+    (e) => {
+      const imageFormData = new FormData();
+      [].forEach.call(e.target.files, (f) => {
+        imageFormData.append("image", f);
+      });
+      dispatch({
+        type: UPLOAD_IMAGES_REQUEST,
+        data: imageFormData,
+      });
+    },
+    [dispatch]
+  );
 
   const onRemoveImage = useCallback(
     (index) => () => {
@@ -72,12 +75,12 @@ const MemoryWriteComponent = () => {
         data: index,
       });
     },
-    []
+    [dispatch]
   );
 
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
-  }, [imageInput.current]);
+  }, []);
 
   const onSubmitWrite = useCallback(() => {
     if (
@@ -100,7 +103,7 @@ const MemoryWriteComponent = () => {
       type: ADD_POST_REQUEST,
       data: formData,
     });
-  }, [writeTitle, writeContent, rateValue, imagePaths]);
+  }, [writeTitle, writeContent, rateValue, imagePaths, history, dispatch]);
 
   const onChangeRate = useCallback((value) => {
     SetRateValue(value);

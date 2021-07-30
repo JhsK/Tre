@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
-import LoginForm from "./style/LoginForm.css";
 import useInput from "../hooks/useInput";
 import { LOAD_MY_INFO_REQUEST, loginRequestAction } from "../reducers/user";
 
@@ -29,13 +28,13 @@ const LoginComponents = () => {
     if (user) {
       history.replace("/");
     }
-  }, [user]);
+  }, [user, history]);
 
   useEffect(() => {
     dispatch({
       type: LOAD_MY_INFO_REQUEST,
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (logInError) {
@@ -50,7 +49,7 @@ const LoginComponents = () => {
         password,
       })
     );
-  }, [username, password]);
+  }, [username, password, dispatch]);
 
   return (
     <>

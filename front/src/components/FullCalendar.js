@@ -33,7 +33,7 @@ const FullCalendarTest = () => {
     dispatch({
       type: LOAD_PLAN_REQUEST,
     });
-  }, []);
+  }, [dispatch]);
 
   const handleCancel = useCallback(() => {
     setModalVisible(false);
@@ -51,7 +51,7 @@ const FullCalendarTest = () => {
       })
     );
     setTitle("");
-  }, [title, dateValue]);
+  }, [title, dateValue, end, start, dispatch]);
 
   const onClickedDate = useCallback((dateClickInfo) => {
     setDateValue(dateClickInfo.dateStr);

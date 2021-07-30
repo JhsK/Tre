@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POST_REQUEST, REMOVE_POST_REQUEST } from "../reducers/post";
 import { useInView } from "react-intersection-observer";
 import PostImages from "./PostImages";
-import { size, media } from "./style/theme";
+import { media } from "./style/theme";
 
 const { Meta } = Card;
 
@@ -55,7 +55,7 @@ const MemoryLayout = () => {
         lastId,
       });
     }
-  }, [hasMorePost]);
+  }, [hasMorePost, mainPosts, dispatch]);
 
   useEffect(() => {
     if (inView && hasMorePost && !loadPostLoading) {
@@ -65,14 +65,17 @@ const MemoryLayout = () => {
         lastId,
       });
     }
-  }, [inView, hasMorePost, loadPostLoading, mainPosts]);
+  }, [inView, hasMorePost, loadPostLoading, mainPosts, dispatch]);
 
-  const onClickDelete = useCallback((postId) => {
-    dispatch({
-      type: REMOVE_POST_REQUEST,
-      data: postId,
-    });
-  }, []);
+  const onClickDelete = useCallback(
+    (postId) => {
+      dispatch({
+        type: REMOVE_POST_REQUEST,
+        data: postId,
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <StyledBackground>

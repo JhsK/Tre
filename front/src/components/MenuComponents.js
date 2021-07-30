@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { Menu } from "antd";
 import {
   ScheduleOutlined,
@@ -6,11 +6,10 @@ import {
   HourglassOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import LoginForm from "./style/LoginForm.css";
 import { logoutRequestAction } from "../reducers/user";
 
 const { SubMenu } = Menu;
@@ -28,21 +27,21 @@ const MenuStyled = styled(Menu)`
   }
 `;
 
-const Global = createGlobalStyle`
-  .ant-menu-item {
-    padding: 0 0 0 24px  !important;
-  }
+// const Global = createGlobalStyle`
+//   .ant-menu-item {
+//     padding: 0 0 0 24px  !important;
+//   }
 
-  .ant-menu-submenu-title {
-    padding: 0 0 0 24px !important;
-  }
-`;
+//   .ant-menu-submenu-title {
+//     padding: 0 0 0 24px !important;
+//   }
+// `;
 
 const MenuComponents = () => {
   const history = useHistory();
   const pathURL = history.location.pathname;
   const dispatch = useDispatch();
-  const [menuState, setMenuState] = useState(false);
+  //const [menuState, setMenuState] = useState(false);
 
   const imgSrcOneDepth = "image/logo.png";
   const imgSrcTwoDepth = "../image/logo.png";
@@ -50,30 +49,28 @@ const MenuComponents = () => {
   const onClickedLogout = useCallback(() => {
     dispatch(logoutRequestAction());
     history.push("/");
-  }, []);
+  }, [history, dispatch]);
 
   return (
     <>
       <MenuStyled
         style={{ width: "15%", height: "100%" }}
-        menuProps={menuState}
+        //menuProps={menuState}
         defaultSelectedKeys={["1"]}
         mode="inline"
         theme="light"
-        inlineCollapsed={menuState}
+        //inlineCollapsed={menuState}
       >
-        {menuState && <Global />}
-        {!menuState && (
-          <LogoImg
-            src={
-              pathURL[pathURL.indexOf("memory") + 2] ||
-              pathURL === "/memory/write"
-                ? imgSrcTwoDepth
-                : imgSrcOneDepth
-            }
-            alt="logo"
-          />
-        )}
+        <LogoImg
+          src={
+            pathURL[pathURL.indexOf("memory") + 2] ||
+            pathURL === "/memory/write"
+              ? imgSrcTwoDepth
+              : imgSrcOneDepth
+          }
+          alt="logo"
+        />
+
         <Menu.Item
           key="1"
           icon={<ScheduleOutlined style={{ fontSize: "1rem" }} />}

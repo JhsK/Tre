@@ -52,7 +52,7 @@ const InfoLayout = () => {
       data: nickInput,
     });
     setNickModal(false);
-  }, [nickInput]);
+  }, [nickInput, dispatch]);
 
   const nickCancel = useCallback(() => {
     setNickModal(false);
@@ -64,7 +64,7 @@ const InfoLayout = () => {
       data: emailInput,
     });
     setEmailModal(false);
-  }, [emailInput]);
+  }, [emailInput, dispatch]);
 
   const emailCancel = useCallback(() => {
     setEmailModal(false);

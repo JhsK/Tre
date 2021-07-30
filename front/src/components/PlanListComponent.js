@@ -32,7 +32,7 @@ const PlanListComponent = ({ dateValue }) => {
         state: { planList: planList },
       });
     },
-    [planList]
+    [planList, history]
   );
 
   return (

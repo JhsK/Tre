@@ -19,7 +19,7 @@ const JoinComponents = () => {
     if (signUpDone) {
       history.push("/");
     }
-  }, [signUpDone]);
+  }, [signUpDone, history]);
 
   useEffect(() => {
     if (signUpError) {
@@ -33,7 +33,7 @@ const JoinComponents = () => {
       data: { username, password, nickname, email },
     });
     //console.log(username, password, nickname, email);
-  }, [username, password, nickname, email]);
+  }, [username, password, nickname, email, dispatch]);
 
   return (
     <>

@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
-import plan, { updatePlan } from "../reducers/plan";
+import { updatePlan } from "../reducers/plan";
 import moment from "moment";
 
 const Global = createGlobalStyle`
@@ -88,7 +88,7 @@ const PlanUpdateLayout = () => {
       })
     );
     history.push("/calendar");
-  }, [title, start, end]);
+  }, [title, start, end, planList, history, dispatch]);
 
   return (
     <StyledContainer>

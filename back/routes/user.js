@@ -66,7 +66,7 @@ router.post("/", isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
       where: {
-        username: req.body.email,
+        username: req.body.username,
       },
     });
     if (exUser) {
