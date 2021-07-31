@@ -26,11 +26,17 @@ const CardContainer = styled.div`
     width: 23%;
     margin: 0 0rem 0rem 0rem;
     //height: 370px;
-    height: 100%;
+    //height: 100%;
+    display: flex;
+    flex-direction: column;
 
     ${media.desktop`width: 30%;`}
     ${media.tabletLarge`width: 45%;`}
     ${media.mobile`width:950%;`}
+  }
+
+  .card-textarea {
+    flex: 1 1 auto;
   }
 
   ${(props) =>
@@ -119,6 +125,7 @@ const MemoryLayout = () => {
               <Link to={`/memory/${post.id}`}>
                 <Meta
                   title={post.title}
+                  className="card-textarea"
                   description={
                     post.content.length > 70
                       ? post.content.substring(0, 70).concat("...")

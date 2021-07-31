@@ -31,7 +31,7 @@ const ImagesZoom = ({ images, onClose }) => {
         >
           {images.map((v) => (
             <ImageWrapper key={v.src}>
-              <img src={`http://localhost:3065/${v.src}`} alt={v.src} />
+              <img src={`https://treback.herokuapp.com/${v.src}`} alt={v.src} />
             </ImageWrapper>
           ))}
         </Slick>

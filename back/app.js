@@ -31,7 +31,8 @@ app.use(
     credentials: true,
   })
 );
-app.use("/", express.static(path.join(__dirname, "uploads")));
+app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "/app/uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -40,13 +41,23 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
+    proxy: true,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", (req, res) => {
-  res.send("hello api");
+  res.sendFile(path.join(__dirname + "build/index.html"));
+  //res.send("hello api");
+});
+
+app.get("/login", (req, res) => {
+  res.redirect("/");
 });
 
 app.use("/user", userRouter);

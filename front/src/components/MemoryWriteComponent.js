@@ -174,7 +174,7 @@ const MemoryWriteComponent = () => {
             <PreviewContainer>
               {imagePaths.map((v, i) => (
                 <PreviewImage key={v}>
-                  <img src={`http://localhost:3065/${v}`} alt={v} />
+                  <img src={`https://treback.herokuapp.com/${v}`} alt={v} />
                   <div>
                     <Button onClick={onRemoveImage(i)}>제거</Button>
                   </div>

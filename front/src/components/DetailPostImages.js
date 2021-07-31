@@ -22,7 +22,7 @@ const DetailPostImages = ({ images }) => {
     return (
       <>
         <img
-          src={`http://localhost:3065/${images[0].src}`}
+          src={`https://treback.herokuapp.com/${images[0].src}`}
           alt={images[0].src}
           style={{ width: "100%", maxHeight: "350px" }}
         />
@@ -33,12 +33,12 @@ const DetailPostImages = ({ images }) => {
     return (
       <ImagesContainer>
         <img
-          src={`http://localhost:3065/${images[0].src}`}
+          src={`https://treback.herokuapp.com/${images[0].src}`}
           style={{ width: "50%" }}
           alt={images[0].src}
         />
         <img
-          src={`http://localhost:3065/${images[1].src}`}
+          src={`https://treback.herokuapp.com/${images[1].src}`}
           style={{ width: "50%" }}
           alt={images[1].src}
         />
@@ -49,7 +49,7 @@ const DetailPostImages = ({ images }) => {
     <>
       <div style={{ height: "350px" }}>
         <img
-          src={`http://localhost:3065/${images[0].src}`}
+          src={`https://treback.herokuapp.com/${images[0].src}`}
           width="50%"
           alt={images[0].src}
           style={{ maxHeight: "400px" }}

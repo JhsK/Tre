@@ -4,7 +4,8 @@ import userSaga from "./user";
 import postSaga from "./post";
 import planSaga from "./plan";
 
-axios.defaults.baseURL = "http://localhost:3065";
+//axios.defaults.baseURL = "https://treback.herokuapp.com/";
+//axios.defaults.baseURL = "http://localhost:3065/";
 axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {

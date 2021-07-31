@@ -42,7 +42,7 @@ function emailChangeAPI(data) {
 }
 
 function loadMyInfoAPI() {
-  return axios.get("user");
+  return axios.get("/user");
 }
 
 function* logIn(action) {
