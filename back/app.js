@@ -32,7 +32,7 @@ app.use(
   })
 );
 app.use(express.static(path.join(__dirname, "build")));
-app.use(express.static(path.join(__dirname, "/app/uploads")));
+app.use("/", express.static(path.join(__dirname, "/app/uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));

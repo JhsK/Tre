@@ -8,7 +8,7 @@ module.exports = () => {
     new KakaoStrategy(
       {
         clientID: process.env.KAKAO_ID,
-        callbackURL: "/user/kakao/callback",
+        callbackURL: "https://treback.herokuapp.com/user/kakao/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
         console.log("kakao profile", profile);
