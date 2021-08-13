@@ -85,6 +85,6 @@ Info Page
 ## 📄 기획 및 설계
 
 - 🖥 [화면 설계서](https://whimsical.com/tre-5wLaojqAbXzzNZWW5z2gqX)
-- ⚙ [기능 명세서](https://www.notion.so/difunto/ac01f0efd7eb4b35983bf17234bf0e5a)
-- 🗂 [DB 명세서](https://www.notion.so/difunto/DB-824da7f74d7640ae9dc1f1435f2fbf8a)
-- 📬 [API 명세서](https://difunto.notion.site/API-84e36242c67443ddad2ec61d02162780)
+- ⚙ [기능 명세서](https://fluffy-tub-10c.notion.site/441dfa2f2397494aa8bf3d74cabe6a08)
+- 🗂 [DB 명세서](https://fluffy-tub-10c.notion.site/DB-ae52035fff284f919fe11381a6dcf783)
+- 📬 [API 명세서](https://fluffy-tub-10c.notion.site/API-fdbc2b845f0e4eada2fc7010d35762b9)
